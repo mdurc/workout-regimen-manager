@@ -206,7 +206,8 @@ struct ContentView: View {
                         .offset(x:-5)
                     
                     TextEditor(text: $submissionString)
-                        .border(Color.gray, width: 1)
+                        .border(Color(rgb: (235,219,178)), width: 1)
+                        .cornerRadius(1)
                         .frame(width:120, height: 35)
                         .offset(x:-5)
                         .autocapitalization(.none)
@@ -241,20 +242,32 @@ struct ContentView: View {
                     }
                 }
                 
-                Text("Edit Workout:")
-                    .font(.headline)
-                    .foregroundColor(.gruvboxForeground)
-                    .padding()
                 
                 let currentDay = getDayOfWeek()
                 
                 if currentDay == .monday || currentDay == .thursday{
+                    Text("Edit Workout for Monday & Thursday:")
+                        .font(.headline)
+                        .foregroundColor(.gruvboxForeground)
+                        .padding()
                     EditableTextArea(text: $pullDay, isEditing: $isEditing, hasEdits: $hasEdits)
                 }else if currentDay == .tuesday || currentDay == .friday {
+                    Text("Edit Workout for Tuesday & Friday:")
+                        .font(.headline)
+                        .foregroundColor(.gruvboxForeground)
+                        .padding()
                     EditableTextArea(text: $pushDay, isEditing: $isEditing, hasEdits: $hasEdits)
                 } else if currentDay == .wednesday || currentDay == .saturday{
+                    Text("Edit Workout for Wednesday & Saturday:")
+                        .font(.headline)
+                        .foregroundColor(.gruvboxForeground)
+                        .padding()
                     EditableTextArea(text: $legDay, isEditing: $isEditing, hasEdits: $hasEdits)
                 } else { // rest Sunday
+                    Text("Edit Workout for Sunday:")
+                        .font(.headline)
+                        .foregroundColor(.gruvboxForeground)
+                        .padding()
                     EditableTextArea(text: $restDay, isEditing: $isEditing, hasEdits: $hasEdits)
                 }
                 
@@ -385,6 +398,10 @@ struct ContentView: View {
                     .foregroundColor(.gruvboxForeground)
                     .background(Color.gruvboxBackground)
                     .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color(rgb: (235,219,178)), lineWidth: 1)
+                    )
                     .onChange(of: text) { _ in
                         isEditing = true
                         hasEdits = true
@@ -426,12 +443,18 @@ struct ContentView: View {
     }
 }
 
-
 extension Color {
     static let gruvboxBackground = Color(red: 40/255, green: 40/255, blue: 40/255)
     static let gruvboxForeground = Color(red: 235/255, green: 219/255, blue: 178/255)
     static let gruvboxAccent = Color(red: 146/255, green: 131/255, blue: 116/255)
     static let gruvboxSecondary = Color(red: 180/255, green: 98/255, blue: 99/255)
+    
+    init(rgb: (Int, Int, Int)) {
+            let red = Double(rgb.0) / 255.0
+            let green = Double(rgb.1) / 255.0
+            let blue = Double(rgb.2) / 255.0
+            self.init(red: red, green: green, blue: blue)
+        }
 }
 
 
