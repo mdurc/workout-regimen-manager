@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 import AlamofireImage
-
+import WidgetKit
 
 struct ContentView: View {
 
@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var timer: Timer? = nil
     @State private var elapsedTime: TimeInterval = 0
     @State private var isRunning = false
-    @State private var isShowingSettingsPopup = false // Added for custom popup
+    @State private var isShowingSettingsPopup = false
     @State private var isEditing = false
     @State private var hasEdits = false
     @State private var isImageVisible = false
@@ -27,9 +27,7 @@ struct ContentView: View {
     @State private var searchQuery="kittens"
 
     
-    @State private var day = "";
-
-
+    @State private var day = ""
 
     @AppStorage("pullDay") private var pullDay = "3 SETS OF EACH\nScapula Pull ups - 10-12 REPS\nDead Hangs - 15-20 SECONDS\nOne Arm Rows - 12-15 REPS\nFL Raises - 4-6 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPull Ups - 8-10 REPS\nBicep Curls - 8 REPS\nChin Ups - 8-10 REPS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
     @AppStorage("pushDay") private var pushDay = "3 SETS OF EACH\nScapula Push-ups - 12-15 REPS\nPlanche Lean - 15-20 SECONDS\nPseudo Planche Pushups - 12-15 REPS\nArcher Pushups - 10-12 REPS\nParallel Bar Dips - 8-10 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPike Push-Ups - 12-15 REPS\nDiamond Push Up - 12-15 REPS\nSide Plank - 45 SECONDS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
@@ -80,7 +78,7 @@ struct ContentView: View {
                     }
                     Spacer()
                     Button(action: {
-                        isShowingSettingsPopup = true // Show the custom popup
+                        isShowingSettingsPopup = true
                         isEditing=true
                     }) {
                         Image(systemName: "gearshape")
@@ -94,9 +92,9 @@ struct ContentView: View {
                 
                 
                 Text("\(formattedElapsedTime)")
-                    .font(.system(size: 70, design: .monospaced)) // Use monospaced font
+                    .font(.system(size: 70, design: .monospaced))
                     .foregroundColor(.gruvboxForeground)
-                    .frame(width: 400) // Adjust width to make it fixed
+                    .frame(width: 400)
 
                 HStack(spacing: 20) {
                     
@@ -193,7 +191,7 @@ struct ContentView: View {
     
     private func settingsPopup() -> some View {
         ZStack {
-            Color.black.opacity(0.5) // Semi-transparent background
+            Color.black.opacity(0.5)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
@@ -273,6 +271,7 @@ struct ContentView: View {
                 
                 HStack(spacing: 20) {
                     Button("Save") {
+                        sendPlan(for: getDayOfWeek())
                         withAnimation(.easeInOut(duration: 0.3)) {
                             switch currentDay {
                                 case .monday, .thursday:
@@ -361,6 +360,25 @@ struct ContentView: View {
                 default: return .sunday
             }
         }
+    
+    private func sendPlan(for day: DayOfWeek){
+        switch day {
+            case .monday, .thursday:
+                let dataToShare = pullDay
+                SharedDataManager.shared.saveData(dataToShare, forKey: "pullDay")
+            case .tuesday, .friday:
+                let dataToShare = pushDay
+                SharedDataManager.shared.saveData(dataToShare, forKey: "pushDay")
+            case .wednesday, .saturday:
+                let dataToShare = legDay
+                SharedDataManager.shared.saveData(dataToShare, forKey: "legDay")
+            case .sunday:
+                let dataToShare = restDay
+                SharedDataManager.shared.saveData(dataToShare, forKey: "restDay")
+        }
+        WidgetCenter.shared.reloadAllTimelines()
+
+    }
     
     private func workoutListPushDay() -> some View {
                 Text(pushDay)

@@ -10,6 +10,8 @@
 		D756A5AA2A848D0C0073DEFE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D756A5A92A848D0C0073DEFE /* Alamofire */; };
 		D756A5AD2A848D0C0073DEFE /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = D756A5AC2A848D0C0073DEFE /* AlamofireImage */; };
 		D798173A2A801F93009E6F96 /* MessageWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79817392A801F93009E6F96 /* MessageWidgetView.swift */; };
+		D7C64E942A816D8100B8E967 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C64E932A816D8100B8E967 /* SharedDataManager.swift */; };
+		D7C64E952A816D8100B8E967 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C64E932A816D8100B8E967 /* SharedDataManager.swift */; };
 		D7FC5EE62A801A1200EC23BB /* text_widgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5EE52A801A1200EC23BB /* text_widgetApp.swift */; };
 		D7FC5EE82A801A1200EC23BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5EE72A801A1200EC23BB /* ContentView.swift */; };
 		D7FC5EEA2A801A1300EC23BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7FC5EE92A801A1300EC23BB /* Assets.xcassets */; };
@@ -69,6 +71,9 @@
 /* Begin PBXFileReference section */
 		D756A5A72A848D0C0073DEFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D79817392A801F93009E6F96 /* MessageWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWidgetView.swift; sourceTree = "<group>"; };
+		D7C64E912A816A1100B8E967 /* text-widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "text-widget.entitlements"; sourceTree = "<group>"; };
+		D7C64E922A816C6400B8E967 /* MessageWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageWidgetExtension.entitlements; sourceTree = "<group>"; };
+		D7C64E932A816D8100B8E967 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
 		D7FC5EE22A801A1200EC23BB /* text-widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-widget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FC5EE52A801A1200EC23BB /* text_widgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_widgetApp.swift; sourceTree = "<group>"; };
 		D7FC5EE72A801A1200EC23BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +134,8 @@
 		D7FC5ED92A801A1200EC23BB = {
 			isa = PBXGroup;
 			children = (
+				D7C64E922A816C6400B8E967 /* MessageWidgetExtension.entitlements */,
+				D7C64E932A816D8100B8E967 /* SharedDataManager.swift */,
 				D7FC5EE42A801A1200EC23BB /* text-widget */,
 				D7FC5EF52A801A1400EC23BB /* text-widgetTests */,
 				D7FC5EFF2A801A1400EC23BB /* text-widgetUITests */,
@@ -152,6 +159,7 @@
 		D7FC5EE42A801A1200EC23BB /* text-widget */ = {
 			isa = PBXGroup;
 			children = (
+				D7C64E912A816A1100B8E967 /* text-widget.entitlements */,
 				D756A5A72A848D0C0073DEFE /* Info.plist */,
 				D7FC5EE52A801A1200EC23BB /* text_widgetApp.swift */,
 				D7FC5EE72A801A1200EC23BB /* ContentView.swift */,
@@ -380,6 +388,7 @@
 			files = (
 				D7FC5EE82A801A1200EC23BB /* ContentView.swift in Sources */,
 				D7FC5EE62A801A1200EC23BB /* text_widgetApp.swift in Sources */,
+				D7C64E942A816D8100B8E967 /* SharedDataManager.swift in Sources */,
 				D7FC5F252A801A7000EC23BB /* MessageWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +418,7 @@
 				D7FC5F1F2A801A6F00EC23BB /* MessageWidget.swift in Sources */,
 				D7FC5F1D2A801A6F00EC23BB /* MessageWidgetLiveActivity.swift in Sources */,
 				D7FC5F1B2A801A6F00EC23BB /* MessageWidgetBundle.swift in Sources */,
+				D7C64E952A816D8100B8E967 /* SharedDataManager.swift in Sources */,
 				D798173A2A801F93009E6F96 /* MessageWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +565,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "text-widget/text-widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"text-widget/Preview Content\"";
@@ -588,6 +599,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = "text-widget/text-widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"text-widget/Preview Content\"";
@@ -691,6 +703,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MessageWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 682Z2J4SJX;
@@ -718,6 +731,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MessageWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 682Z2J4SJX;

@@ -21,6 +21,25 @@ struct GruvboxStyle {
 struct MessageWidgetView: View {
     let message: String
     @Environment(\.widgetFamily) var widgetFamily
+    
+    var plan: String
+    
+    init(message: String) {
+        self.message = message
+        self.plan = ""
+        switch  getDayOfWeek(){
+            case .monday, .thursday:
+                self.plan = getPlan(using: "pullDay")
+            case .tuesday, .friday:
+                self.plan = getPlan(using: "pushDay")
+            case .wednesday, .saturday:
+                self.plan = getPlan(using: "legDay")
+            case .sunday:
+                self.plan = getPlan(using: "restDay")
+        }
+        
+    }
+
 
     var body: some View {
         ZStack {
@@ -47,11 +66,22 @@ struct MessageWidgetView: View {
                                     .font(.headline)
                                     .foregroundColor(GruvboxStyle.accentColor)
                             }
+                            .offset(y:-10)
+                            Text(plan)
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundColor(GruvboxStyle.primaryTextColor)
+                                .padding(.bottom,-50)
+                                .padding(.top,-10)
+                                .padding(.leading,16)
+                                .offset(y:-10)
+                                .offset(x:-14)
                             
                             Spacer()
                             Text("mattd")
                                 .font(.custom(GruvboxStyle.fontFamily, size: 20))
                                 .foregroundColor(GruvboxStyle.secondaryTextColor)
+                                .padding(.top,-30)
+                                .offset(y:20)
                         case .systemMedium:
                             // For medium widget, display only the "Date:" title
                             HStack {
@@ -87,18 +117,51 @@ struct MessageWidgetView: View {
                             Text(message)
                                 .font(.system(size: 22, weight: .bold))
                         default:
-                            Text("Some other WidgetFamily in the future.")
+                            Text("unsupported widget size")
                 }
                 
             }
             .padding()
         }
     }
+    
 
     private func getFormattedDate(mode: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = mode
         return formatter.string(from: Date())
     }
+    
+    enum DayOfWeek {
+        case sunday, monday, tuesday, wednesday, thursday, friday, saturday
+    }
+
+    
+    private func getDayOfWeek() -> DayOfWeek {
+            let date = Date()
+            let calendar = Calendar.current
+            let weekday = calendar.component(.weekday, from: date)
+            switch weekday {
+                case 1: return .sunday
+                case 2: return .monday
+                case 3: return .tuesday
+                case 4: return .wednesday
+                case 5: return .thursday
+                case 6: return .friday
+                case 7: return .saturday
+                default: return .sunday
+            }
+        }
+    
+    private func getPlan(using inputData: String) -> String {
+        if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
+            //print("Widget received data: \(sharedData)")
+            return sharedData
+        } else {
+            //print("No shared data available")
+        }
+        return "none"
+    }
 }
+
 
