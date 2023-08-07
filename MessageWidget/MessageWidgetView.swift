@@ -77,8 +77,8 @@ struct MessageWidgetView: View {
                                 .offset(x:-14)
                             
                             Spacer()
-                            Text("mattd")
-                                .font(.custom(GruvboxStyle.fontFamily, size: 20))
+                            Text("workout")
+                                .font(.custom(GruvboxStyle.fontFamily, size: 15))
                                 .foregroundColor(GruvboxStyle.secondaryTextColor)
                                 .padding(.top,-30)
                                 .offset(y:20)
@@ -102,8 +102,8 @@ struct MessageWidgetView: View {
                                     .foregroundColor(GruvboxStyle.accentColor)
                             }
                             Spacer()
-                            Text("mattd")
-                                .font(.custom(GruvboxStyle.fontFamily, size: 20))
+                            Text("workout")
+                                .font(.custom(GruvboxStyle.fontFamily, size: 15))
                                 .foregroundColor(GruvboxStyle.secondaryTextColor)
                         case .systemSmall:
                             // For small widget, display only the day of the week and the workout message
