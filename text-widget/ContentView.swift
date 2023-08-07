@@ -6,13 +6,9 @@
 //
 
 import SwiftUI
-import Alamofire
-import AlamofireImage
 
 
 struct ContentView: View {
-
-    @State private var imageUrl: URL?
 
     @State private var timer: Timer? = nil
     @State private var elapsedTime: TimeInterval = 0
@@ -20,11 +16,6 @@ struct ContentView: View {
     @State private var isShowingSettingsPopup = false // Added for custom popup
     @State private var isEditing = false
     @State private var hasEdits = false
-    @State private var isImageVisible = false
-    @State private var motivationText = "Show Motivation"
-
-    @State private var submissionString: String = ""
-    @State private var searchQuery="kittens"
 
     
     @State private var day = "";
@@ -53,31 +44,6 @@ struct ContentView: View {
             VStack(spacing: 30) {
                 // Settings button
                 HStack {
-                    if isImageVisible {
-                        if let imageUrl = imageUrl {
-                            RemoteImageView(url: imageUrl)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 200, height: 200)
-                                .cornerRadius(10)
-                                .onTapGesture {
-                                    fetchRandomImage()
-                                }
-                                .offset(y: -50)
-                                .offset(x: 100)
-                                .padding(-85)
-                            
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .foregroundColor(.gruvboxForeground)
-                                .padding(.top, -85)
-                                .onTapGesture {
-                                    fetchRandomImage()
-                                }
-                                .offset(x: 70)
-                        }
-                    }
                     Spacer()
                     Button(action: {
                         isShowingSettingsPopup = true // Show the custom popup
@@ -168,27 +134,7 @@ struct ContentView: View {
         }
     }
     
-    func fetchRandomImage() {
-        let accessKey = "rlyN2iwO7k6KjZvNdahWPhSNoOzF2XVKJkUfdLkFvr4"
-        
-        let endpoint = "https://api.unsplash.com/photos/random"
-        let headers: HTTPHeaders = ["Authorization": "Client-ID \(accessKey)"]
-        let parameters: Parameters = ["query": searchQuery]
-        
-        AF.request(endpoint, method: .get, parameters: parameters, headers: headers)
-            .validate()
-            .responseDecodable(of: UnsplashResponse.self) { response in
-                switch response.result {
-                case .success(let unsplashResponse):
-                    if let imageUrlString = unsplashResponse.urls["regular"],
-                       let imageUrl = URL(string: imageUrlString) {
-                        self.imageUrl = imageUrl
-                    }
-                case .failure(let error):
-                    print("Error: \(error)")
-                }
-            }
-    }
+  
 
     
     private func settingsPopup() -> some View {
@@ -197,49 +143,8 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                HStack{
-                    
-                    
-                    Text("Search:")
-                        .font(.headline)
-                        .foregroundColor(.gruvboxForeground)
-                        .offset(x:-5)
-                    
-                    TextEditor(text: $submissionString)
-                        .border(Color.gray, width: 1)
-                        .frame(width:120, height: 35)
-                        .offset(x:-5)
-                        .autocapitalization(.none)
-                        .scrollContentBackground(.hidden)
-                        .foregroundColor(.gruvboxAccent)
-                        .background(Color.gruvboxBackground)
-                        .onChange(of: submissionString) { newValue in
-                            if newValue.hasSuffix("\n") {
-                                searchQuery = submissionString
-                                submissionString = "" // Clear the text
-                            }
-                        }
-                    Button(action: {
-                        isImageVisible.toggle()
-                        fetchRandomImage()
-                        motivationText = isImageVisible ? "Hide Motivation" : "Show Motivation"
-                    }) {
-                        if isImageVisible{
-                            Text(motivationText)
-                                .foregroundColor(.gruvboxBackground)
-                                .padding()
-                                .background(Color.gruvboxSecondary)
-                                .cornerRadius(10)
-                        }else{
-                            Text(motivationText)
-                                .foregroundColor(.gruvboxForeground)
-                                .padding()
-                                .background(Color.gruvboxAccent)
-                                .cornerRadius(10)
-                        }
-                        
-                    }
-                }
+                
+                
                 
                 Text("Edit Workout:")
                     .font(.headline)
@@ -439,31 +344,4 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
-}
-
-struct RemoteImageView: View {
-    let url: URL
-    
-    var body: some View {
-        AsyncImage(url: url) { phase in
-            switch phase {
-            case .success(let image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            case .failure:
-                Image(systemName: "photo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            case .empty:
-                ProgressView()
-            @unknown default:
-                EmptyView()
-            }
-        }
-    }
-}
-
-struct UnsplashResponse: Codable {
-    let urls: [String: String]
 }
