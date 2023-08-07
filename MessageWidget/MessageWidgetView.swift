@@ -24,64 +24,70 @@ struct MessageWidgetView: View {
 
     var body: some View {
         ZStack {
+            AccessoryWidgetBackground()
             GruvboxStyle.backgroundColor.edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .leading, spacing: 20) {
-                if widgetFamily == .systemLarge {
-                    HStack {
-                        Text("Date:")
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.primaryTextColor)
-                        Text(getFormattedDate(mode: "EEEE, MMMM d"))
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.accentColor)
-                    }
+                switch widgetFamily {
+                        case .systemLarge:
+                            HStack {
+                                Text("Date:")
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.primaryTextColor)
+                                Text(getFormattedDate(mode: "EEEE, MMMM d"))
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.accentColor)
+                            }
 
-                    HStack {
-                        Text("Workout:")
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.primaryTextColor)
-                        Text(message)
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.accentColor)
-                    }
-                    
-                    Spacer()
-                    Text("mattd")
-                        .font(.custom(GruvboxStyle.fontFamily, size: 20))
-                        .foregroundColor(GruvboxStyle.secondaryTextColor)
-                } else if widgetFamily == .systemMedium {
-                    // For medium widget, display only the "Date:" title
-                    HStack {
-                        Text("Date:")
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.primaryTextColor)
-                        Text(getFormattedDate(mode: "EEEE, MMMM d"))
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.accentColor)
-                    }
+                            HStack {
+                                Text("Workout:")
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.primaryTextColor)
+                                Text(message)
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.accentColor)
+                            }
+                            
+                            Spacer()
+                            Text("mattd")
+                                .font(.custom(GruvboxStyle.fontFamily, size: 20))
+                                .foregroundColor(GruvboxStyle.secondaryTextColor)
+                        case .systemMedium:
+                            // For medium widget, display only the "Date:" title
+                            HStack {
+                                Text("Date:")
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.primaryTextColor)
+                                Text(getFormattedDate(mode: "EEEE, MMMM d"))
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.accentColor)
+                            }
 
-                    HStack {
-                        Text("Workout:")
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.primaryTextColor)
-                        Text(message)
-                            .font(.headline)
-                            .foregroundColor(GruvboxStyle.accentColor)
-                    }
-                    Spacer()
-                    Text("mattd")
-                        .font(.custom(GruvboxStyle.fontFamily, size: 20))
-                        .foregroundColor(GruvboxStyle.secondaryTextColor)
-                    
-                } else {
-                    // For small widget, display only the day of the week and the workout message
-                    Text(getFormattedDate(mode: "EEEE"))
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(GruvboxStyle.primaryTextColor)
-                    Text(message)
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(GruvboxStyle.primaryTextColor)
+                            HStack {
+                                Text("Workout:")
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.primaryTextColor)
+                                Text(message)
+                                    .font(.headline)
+                                    .foregroundColor(GruvboxStyle.accentColor)
+                            }
+                            Spacer()
+                            Text("mattd")
+                                .font(.custom(GruvboxStyle.fontFamily, size: 20))
+                                .foregroundColor(GruvboxStyle.secondaryTextColor)
+                        case .systemSmall:
+                            // For small widget, display only the day of the week and the workout message
+                            Text(getFormattedDate(mode: "EEEE"))
+                                .font(.system(size: 22, weight: .bold))
+                                .foregroundColor(GruvboxStyle.primaryTextColor)
+                            Text(message)
+                                .font(.system(size: 22, weight: .bold))
+                                .foregroundColor(GruvboxStyle.primaryTextColor)
+                        case .accessoryInline:
+                            Text(message)
+                                .font(.system(size: 22, weight: .bold))
+                        default:
+                            Text("Some other WidgetFamily in the future.")
                 }
                 
             }

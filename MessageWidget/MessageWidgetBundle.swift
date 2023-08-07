@@ -17,6 +17,7 @@ struct MessageWidget: Widget {
         }
         .configurationDisplayName("Message Widget")
         .description("Displays a different message based on the day of the week.")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .accessoryInline])
     }
 }
 
