@@ -16,11 +16,11 @@ struct MessageEntry: TimelineEntry {
 struct MessageWidgetProvider: TimelineProvider {
     typealias Entry=MessageEntry
     func placeholder(in context: Context) -> MessageEntry {
-        MessageEntry(date: Date(), message: "Placeholder Message")
+        MessageEntry(date: Date(), message: "Workout")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MessageEntry) -> ()) {
-        let entry = MessageEntry(date: Date(), message: "Placeholder Message")
+        let entry = MessageEntry(date: Date(), message: "Workout")
         completion(entry)
     }
 

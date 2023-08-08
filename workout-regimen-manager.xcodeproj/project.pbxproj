@@ -12,13 +12,9 @@
 		D798173A2A801F93009E6F96 /* MessageWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79817392A801F93009E6F96 /* MessageWidgetView.swift */; };
 		D7C64E942A816D8100B8E967 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C64E932A816D8100B8E967 /* SharedDataManager.swift */; };
 		D7C64E952A816D8100B8E967 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C64E932A816D8100B8E967 /* SharedDataManager.swift */; };
-		D7FC5EE62A801A1200EC23BB /* text_widgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5EE52A801A1200EC23BB /* text_widgetApp.swift */; };
 		D7FC5EE82A801A1200EC23BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5EE72A801A1200EC23BB /* ContentView.swift */; };
 		D7FC5EEA2A801A1300EC23BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7FC5EE92A801A1300EC23BB /* Assets.xcassets */; };
 		D7FC5EED2A801A1300EC23BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7FC5EEC2A801A1300EC23BB /* Preview Assets.xcassets */; };
-		D7FC5EF72A801A1400EC23BB /* text_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5EF62A801A1400EC23BB /* text_widgetTests.swift */; };
-		D7FC5F012A801A1400EC23BB /* text_widgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5F002A801A1400EC23BB /* text_widgetUITests.swift */; };
-		D7FC5F032A801A1400EC23BB /* text_widgetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5F022A801A1400EC23BB /* text_widgetUITestsLaunchTests.swift */; };
 		D7FC5F162A801A6F00EC23BB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7FC5F152A801A6F00EC23BB /* WidgetKit.framework */; };
 		D7FC5F182A801A6F00EC23BB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7FC5F172A801A6F00EC23BB /* SwiftUI.framework */; };
 		D7FC5F1B2A801A6F00EC23BB /* MessageWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5F1A2A801A6F00EC23BB /* MessageWidgetBundle.swift */; };
@@ -31,20 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D7FC5EF32A801A1400EC23BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D7FC5EDA2A801A1200EC23BB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D7FC5EE12A801A1200EC23BB;
-			remoteInfo = "text-widget";
-		};
-		D7FC5EFD2A801A1400EC23BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D7FC5EDA2A801A1200EC23BB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D7FC5EE12A801A1200EC23BB;
-			remoteInfo = "text-widget";
-		};
 		D7FC5F262A801A7000EC23BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D7FC5EDA2A801A1200EC23BB /* Project object */;
@@ -71,19 +53,11 @@
 /* Begin PBXFileReference section */
 		D756A5A72A848D0C0073DEFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D79817392A801F93009E6F96 /* MessageWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWidgetView.swift; sourceTree = "<group>"; };
-		D7C64E912A816A1100B8E967 /* text-widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "text-widget.entitlements"; sourceTree = "<group>"; };
-		D7C64E922A816C6400B8E967 /* MessageWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessageWidgetExtension.entitlements; sourceTree = "<group>"; };
 		D7C64E932A816D8100B8E967 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
-		D7FC5EE22A801A1200EC23BB /* text-widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-widget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7FC5EE52A801A1200EC23BB /* text_widgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_widgetApp.swift; sourceTree = "<group>"; };
+		D7FC5EE22A801A1200EC23BB /* workout-regimen-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "workout-regimen-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FC5EE72A801A1200EC23BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D7FC5EE92A801A1300EC23BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7FC5EEC2A801A1300EC23BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D7FC5EF22A801A1400EC23BB /* text-widgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "text-widgetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7FC5EF62A801A1400EC23BB /* text_widgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_widgetTests.swift; sourceTree = "<group>"; };
-		D7FC5EFC2A801A1400EC23BB /* text-widgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "text-widgetUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7FC5F002A801A1400EC23BB /* text_widgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_widgetUITests.swift; sourceTree = "<group>"; };
-		D7FC5F022A801A1400EC23BB /* text_widgetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_widgetUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D7FC5F132A801A6F00EC23BB /* MessageWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FC5F152A801A6F00EC23BB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		D7FC5F172A801A6F00EC23BB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -105,20 +79,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D7FC5EEF2A801A1400EC23BB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D7FC5EF92A801A1400EC23BB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D7FC5F102A801A6F00EC23BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,11 +94,8 @@
 		D7FC5ED92A801A1200EC23BB = {
 			isa = PBXGroup;
 			children = (
-				D7C64E922A816C6400B8E967 /* MessageWidgetExtension.entitlements */,
 				D7C64E932A816D8100B8E967 /* SharedDataManager.swift */,
-				D7FC5EE42A801A1200EC23BB /* text-widget */,
-				D7FC5EF52A801A1400EC23BB /* text-widgetTests */,
-				D7FC5EFF2A801A1400EC23BB /* text-widgetUITests */,
+				D7FC5EE42A801A1200EC23BB /* workout-regimen-manager */,
 				D7FC5F192A801A6F00EC23BB /* MessageWidget */,
 				D7FC5F142A801A6F00EC23BB /* Frameworks */,
 				D7FC5EE32A801A1200EC23BB /* Products */,
@@ -148,25 +105,21 @@
 		D7FC5EE32A801A1200EC23BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D7FC5EE22A801A1200EC23BB /* text-widget.app */,
-				D7FC5EF22A801A1400EC23BB /* text-widgetTests.xctest */,
-				D7FC5EFC2A801A1400EC23BB /* text-widgetUITests.xctest */,
+				D7FC5EE22A801A1200EC23BB /* workout-regimen-manager.app */,
 				D7FC5F132A801A6F00EC23BB /* MessageWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D7FC5EE42A801A1200EC23BB /* text-widget */ = {
+		D7FC5EE42A801A1200EC23BB /* workout-regimen-manager */ = {
 			isa = PBXGroup;
 			children = (
-				D7C64E912A816A1100B8E967 /* text-widget.entitlements */,
 				D756A5A72A848D0C0073DEFE /* Info.plist */,
-				D7FC5EE52A801A1200EC23BB /* text_widgetApp.swift */,
 				D7FC5EE72A801A1200EC23BB /* ContentView.swift */,
 				D7FC5EE92A801A1300EC23BB /* Assets.xcassets */,
 				D7FC5EEB2A801A1300EC23BB /* Preview Content */,
 			);
-			path = "text-widget";
+			path = "workout-regimen-manager";
 			sourceTree = "<group>";
 		};
 		D7FC5EEB2A801A1300EC23BB /* Preview Content */ = {
@@ -175,23 +128,6 @@
 				D7FC5EEC2A801A1300EC23BB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		D7FC5EF52A801A1400EC23BB /* text-widgetTests */ = {
-			isa = PBXGroup;
-			children = (
-				D7FC5EF62A801A1400EC23BB /* text_widgetTests.swift */,
-			);
-			path = "text-widgetTests";
-			sourceTree = "<group>";
-		};
-		D7FC5EFF2A801A1400EC23BB /* text-widgetUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D7FC5F002A801A1400EC23BB /* text_widgetUITests.swift */,
-				D7FC5F022A801A1400EC23BB /* text_widgetUITestsLaunchTests.swift */,
-			);
-			path = "text-widgetUITests";
 			sourceTree = "<group>";
 		};
 		D7FC5F142A801A6F00EC23BB /* Frameworks */ = {
@@ -220,9 +156,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D7FC5EE12A801A1200EC23BB /* text-widget */ = {
+		D7FC5EE12A801A1200EC23BB /* workout-regimen-manager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D7FC5F062A801A1400EC23BB /* Build configuration list for PBXNativeTarget "text-widget" */;
+			buildConfigurationList = D7FC5F062A801A1400EC23BB /* Build configuration list for PBXNativeTarget "workout-regimen-manager" */;
 			buildPhases = (
 				D7FC5EDE2A801A1200EC23BB /* Sources */,
 				D7FC5EDF2A801A1200EC23BB /* Frameworks */,
@@ -234,50 +170,14 @@
 			dependencies = (
 				D7FC5F272A801A7000EC23BB /* PBXTargetDependency */,
 			);
-			name = "text-widget";
+			name = "workout-regimen-manager";
 			packageProductDependencies = (
 				D756A5A92A848D0C0073DEFE /* Alamofire */,
 				D756A5AC2A848D0C0073DEFE /* AlamofireImage */,
 			);
 			productName = "text-widget";
-			productReference = D7FC5EE22A801A1200EC23BB /* text-widget.app */;
+			productReference = D7FC5EE22A801A1200EC23BB /* workout-regimen-manager.app */;
 			productType = "com.apple.product-type.application";
-		};
-		D7FC5EF12A801A1400EC23BB /* text-widgetTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D7FC5F092A801A1400EC23BB /* Build configuration list for PBXNativeTarget "text-widgetTests" */;
-			buildPhases = (
-				D7FC5EEE2A801A1400EC23BB /* Sources */,
-				D7FC5EEF2A801A1400EC23BB /* Frameworks */,
-				D7FC5EF02A801A1400EC23BB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D7FC5EF42A801A1400EC23BB /* PBXTargetDependency */,
-			);
-			name = "text-widgetTests";
-			productName = "text-widgetTests";
-			productReference = D7FC5EF22A801A1400EC23BB /* text-widgetTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D7FC5EFB2A801A1400EC23BB /* text-widgetUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D7FC5F0C2A801A1400EC23BB /* Build configuration list for PBXNativeTarget "text-widgetUITests" */;
-			buildPhases = (
-				D7FC5EF82A801A1400EC23BB /* Sources */,
-				D7FC5EF92A801A1400EC23BB /* Frameworks */,
-				D7FC5EFA2A801A1400EC23BB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D7FC5EFE2A801A1400EC23BB /* PBXTargetDependency */,
-			);
-			name = "text-widgetUITests";
-			productName = "text-widgetUITests";
-			productReference = D7FC5EFC2A801A1400EC23BB /* text-widgetUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		D7FC5F122A801A6F00EC23BB /* MessageWidgetExtension */ = {
 			isa = PBXNativeTarget;
@@ -309,20 +209,12 @@
 					D7FC5EE12A801A1200EC23BB = {
 						CreatedOnToolsVersion = 14.2;
 					};
-					D7FC5EF12A801A1400EC23BB = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = D7FC5EE12A801A1200EC23BB;
-					};
-					D7FC5EFB2A801A1400EC23BB = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = D7FC5EE12A801A1200EC23BB;
-					};
 					D7FC5F122A801A6F00EC23BB = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = D7FC5EDD2A801A1200EC23BB /* Build configuration list for PBXProject "text-widget" */;
+			buildConfigurationList = D7FC5EDD2A801A1200EC23BB /* Build configuration list for PBXProject "workout-regimen-manager" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -339,9 +231,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D7FC5EE12A801A1200EC23BB /* text-widget */,
-				D7FC5EF12A801A1400EC23BB /* text-widgetTests */,
-				D7FC5EFB2A801A1400EC23BB /* text-widgetUITests */,
+				D7FC5EE12A801A1200EC23BB /* workout-regimen-manager */,
 				D7FC5F122A801A6F00EC23BB /* MessageWidgetExtension */,
 			);
 		};
@@ -354,20 +244,6 @@
 			files = (
 				D7FC5EED2A801A1300EC23BB /* Preview Assets.xcassets in Resources */,
 				D7FC5EEA2A801A1300EC23BB /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D7FC5EF02A801A1400EC23BB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D7FC5EFA2A801A1400EC23BB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,26 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7FC5EE82A801A1200EC23BB /* ContentView.swift in Sources */,
-				D7FC5EE62A801A1200EC23BB /* text_widgetApp.swift in Sources */,
 				D7C64E942A816D8100B8E967 /* SharedDataManager.swift in Sources */,
 				D7FC5F252A801A7000EC23BB /* MessageWidget.intentdefinition in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D7FC5EEE2A801A1400EC23BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D7FC5EF72A801A1400EC23BB /* text_widgetTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D7FC5EF82A801A1400EC23BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D7FC5F012A801A1400EC23BB /* text_widgetUITests.swift in Sources */,
-				D7FC5F032A801A1400EC23BB /* text_widgetUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,16 +284,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D7FC5EF42A801A1400EC23BB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D7FC5EE12A801A1200EC23BB /* text-widget */;
-			targetProxy = D7FC5EF32A801A1400EC23BB /* PBXContainerItemProxy */;
-		};
-		D7FC5EFE2A801A1400EC23BB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D7FC5EE12A801A1200EC23BB /* text-widget */;
-			targetProxy = D7FC5EFD2A801A1400EC23BB /* PBXContainerItemProxy */;
-		};
 		D7FC5F272A801A7000EC23BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D7FC5F122A801A6F00EC23BB /* MessageWidgetExtension */;
@@ -565,14 +413,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = "text-widget/text-widget.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "workout-regimen-manager/workout-regimen-manager.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"text-widget/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"workout-regimen-manager/Preview Content\"";
 				DEVELOPMENT_TEAM = 682Z2J4SJX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "text-widget/Info.plist";
+				INFOPLIST_FILE = "workout-regimen-manager/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = workout;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -584,7 +432,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.workout-regimen-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -599,14 +447,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = "text-widget/text-widget.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "workout-regimen-manager/workout-regimen-manager.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"text-widget/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"workout-regimen-manager/Preview Content\"";
 				DEVELOPMENT_TEAM = 682Z2J4SJX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "text-widget/Info.plist";
+				INFOPLIST_FILE = "workout-regimen-manager/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = workout;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -618,83 +466,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.workout-regimen-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		D7FC5F0A2A801A1400EC23BB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widgetTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/text-widget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/text-widget";
-			};
-			name = Debug;
-		};
-		D7FC5F0B2A801A1400EC23BB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widgetTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/text-widget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/text-widget";
-			};
-			name = Release;
-		};
-		D7FC5F0D2A801A1400EC23BB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widgetUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "text-widget";
-			};
-			name = Debug;
-		};
-		D7FC5F0E2A801A1400EC23BB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widgetUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "text-widget";
 			};
 			name = Release;
 		};
@@ -704,6 +480,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = MessageWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 682Z2J4SJX;
@@ -717,8 +494,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widget.MessageWidget";
+				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.workout-regimen-manager.MessageWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -732,6 +510,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = MessageWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 682Z2J4SJX;
@@ -745,8 +524,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.text-widget.MessageWidget";
+				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.workout-regimen-manager.MessageWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -757,7 +537,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D7FC5EDD2A801A1200EC23BB /* Build configuration list for PBXProject "text-widget" */ = {
+		D7FC5EDD2A801A1200EC23BB /* Build configuration list for PBXProject "workout-regimen-manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D7FC5F042A801A1400EC23BB /* Debug */,
@@ -766,29 +546,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D7FC5F062A801A1400EC23BB /* Build configuration list for PBXNativeTarget "text-widget" */ = {
+		D7FC5F062A801A1400EC23BB /* Build configuration list for PBXNativeTarget "workout-regimen-manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D7FC5F072A801A1400EC23BB /* Debug */,
 				D7FC5F082A801A1400EC23BB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D7FC5F092A801A1400EC23BB /* Build configuration list for PBXNativeTarget "text-widgetTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D7FC5F0A2A801A1400EC23BB /* Debug */,
-				D7FC5F0B2A801A1400EC23BB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D7FC5F0C2A801A1400EC23BB /* Build configuration list for PBXNativeTarget "text-widgetUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D7FC5F0D2A801A1400EC23BB /* Debug */,
-				D7FC5F0E2A801A1400EC23BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,6 +1,6 @@
 //
 //  SharedDataManager.swift
-//  text-widget
+//  workout-regimen-manager
 //
 //  Created by Matthew Durcan on 8/7/23.
 //

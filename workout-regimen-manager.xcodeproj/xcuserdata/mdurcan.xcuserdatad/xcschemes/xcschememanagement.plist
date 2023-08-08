@@ -7,9 +7,9 @@
 		<key>MessageWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
-		<key>text-widget.xcscheme_^#shared#^_</key>
+		<key>workout-regimen-manager.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  text-widget
+//  workout-regimen-manager
 //
 //  Created by Matthew Durcan on 8/6/23.
 //
@@ -9,6 +9,15 @@ import SwiftUI
 import Alamofire
 import AlamofireImage
 import WidgetKit
+
+@main
+struct text_widgetApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
 
 struct ContentView: View {
 

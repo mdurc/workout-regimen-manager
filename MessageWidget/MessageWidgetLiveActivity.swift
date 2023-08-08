@@ -11,28 +11,23 @@ import SwiftUI
 
 struct MessageWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
         var value: Int
     }
 
-    // Fixed non-changing properties about your activity go here!
     var name: String
 }
 
 struct MessageWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MessageWidgetAttributes.self) { context in
-            // Lock screen/banner UI goes here
             VStack {
-                Text("Hello")
+                Text("")
             }
             .activityBackgroundTint(Color.cyan)
             .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
                     Text("Leading")
                 }
@@ -41,7 +36,6 @@ struct MessageWidgetLiveActivity: Widget {
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     Text("Bottom")
-                    // more content
                 }
             } compactLeading: {
                 Text("L")
