@@ -32,13 +32,13 @@ struct MessageWidgetProvider: TimelineProvider {
         let dayOfWeek = calendar.component(.weekday, from: currentDate)
 
         let messages = [
-            "Sunday": "Rest day",
-            "Monday": "Pull day",
-            "Tuesday": "Push day",
-            "Wednesday": "Leg day",
-            "Thursday": "Pull day",
-            "Friday": "Push day",
-            "Saturday": "Leg day"
+            "Sunday": "Rest Day",
+            "Monday": "Pull Day",
+            "Tuesday": "Push Day",
+            "Wednesday": "Leg Day",
+            "Thursday": "Pull Day",
+            "Friday": "Push Day",
+            "Saturday": "Leg Day"
         ]
 
         if let message = messages[calendar.weekdaySymbols[dayOfWeek - 1]] {
