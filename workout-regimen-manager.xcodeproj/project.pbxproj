@@ -27,7 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D7FC5F262A801A7000EC23BB /* PBXContainerItemProxy */ = {
+		D71E305D2A83FFAF00A85B21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D7FC5EDA2A801A1200EC23BB /* Project object */;
 			proxyType = 1;
@@ -168,7 +168,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				D7FC5F272A801A7000EC23BB /* PBXTargetDependency */,
+				D71E305E2A83FFAF00A85B21 /* PBXTargetDependency */,
 			);
 			name = "workout-regimen-manager";
 			packageProductDependencies = (
@@ -284,10 +284,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D7FC5F272A801A7000EC23BB /* PBXTargetDependency */ = {
+		D71E305E2A83FFAF00A85B21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D7FC5F122A801A6F00EC23BB /* MessageWidgetExtension */;
-			targetProxy = D7FC5F262A801A7000EC23BB /* PBXContainerItemProxy */;
+			targetProxy = D71E305D2A83FFAF00A85B21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
