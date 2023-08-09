@@ -100,9 +100,11 @@ struct MessageWidgetView: View {
                             Text(getFormattedDate(mode: "EEEE"))
                                 .font(.system(size: 21, weight: .bold))
                                 .foregroundColor(GruvboxStyle.primaryTextColor)
+                                .alignmentGuide(.leading, computeValue: { d in (d.width - d[.leading]) / 2 })
                             Text(message)
                                 .font(.system(size: 21, weight: .bold))
                                 .foregroundColor(GruvboxStyle.primaryTextColor)
+                                .alignmentGuide(.leading, computeValue: { d in (d.width - d[.leading]) / 2 })
                         case .accessoryInline:
                             Text(message)
                                 .font(.system(size: 22, weight: .bold))
