@@ -30,24 +30,32 @@ struct MessageWidgetProvider: TimelineProvider {
         let currentDate = Date()
         let calendar = Calendar.current
         let dayOfWeek = calendar.component(.weekday, from: currentDate)
-
-        let messages = [
-            "Sunday": "Rest Day",
-            "Monday": "Pull Day",
-            "Tuesday": "Push Day",
-            "Wednesday": "Leg Day",
-            "Thursday": "Pull Day",
-            "Friday": "Push Day",
-            "Saturday": "Leg Day"
-        ]
-
-        if let message = messages[calendar.weekdaySymbols[dayOfWeek - 1]] {
-            let entry = MessageEntry(date: currentDate, message: message)
-            entries.append(entry)
+        var dayString = ""
+        switch dayOfWeek {
+            case 1: dayString = "Sunday"
+            case 2: dayString = "Monday"
+            case 3: dayString = "Tuesday"
+            case 4: dayString = "Wednesday"
+            case 5: dayString = "Thursday"
+            case 6: dayString = "Friday"
+            case 7: dayString = "Saturday"
+            default: dayString = "Sunday"
         }
+
+
+        let entry = MessageEntry(date: currentDate, message: searchForWorkoutDay(using: dayString))
+        entries.append(entry)
 
         let nextUpdate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
         let timeline = Timeline(entries: entries, policy: .after(nextUpdate))
         completion(timeline)
+    }
+    
+    func searchForWorkoutDay(using inputData: String) -> String {
+        if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
+            return sharedData
+        } else {
+            return "unknown"
+        }
     }
 }

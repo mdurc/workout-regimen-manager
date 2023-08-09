@@ -27,17 +27,7 @@ struct MessageWidgetView: View {
     init(message: String) {
         self.message = message
         self.plan = ""
-        switch  getDayOfWeek(){
-            case .monday, .thursday:
-                self.plan = getPlan(using: "pullDay")
-            case .tuesday, .friday:
-                self.plan = getPlan(using: "pushDay")
-            case .wednesday, .saturday:
-                self.plan = getPlan(using: "legDay")
-            case .sunday:
-                self.plan = getPlan(using: "restDay")
-        }
-        
+        self.plan = getPlan(using: getPlan(using: getDayOfWeekString()).lowercased().replacingOccurrences(of: " ", with: "") + "Text")
     }
 
 
@@ -108,10 +98,10 @@ struct MessageWidgetView: View {
                         case .systemSmall:
                             // For small widget, display only the day of the week and the workout message
                             Text(getFormattedDate(mode: "EEEE"))
-                                .font(.system(size: 22, weight: .bold))
+                                .font(.system(size: 21, weight: .bold))
                                 .foregroundColor(GruvboxStyle.primaryTextColor)
                             Text(message)
-                                .font(.system(size: 22, weight: .bold))
+                                .font(.system(size: 21, weight: .bold))
                                 .foregroundColor(GruvboxStyle.primaryTextColor)
                         case .accessoryInline:
                             Text(message)
@@ -132,35 +122,28 @@ struct MessageWidgetView: View {
         return formatter.string(from: Date())
     }
     
-    enum DayOfWeek {
-        case sunday, monday, tuesday, wednesday, thursday, friday, saturday
-    }
-
-    
-    private func getDayOfWeek() -> DayOfWeek {
-            let date = Date()
-            let calendar = Calendar.current
-            let weekday = calendar.component(.weekday, from: date)
-            switch weekday {
-                case 1: return .sunday
-                case 2: return .monday
-                case 3: return .tuesday
-                case 4: return .wednesday
-                case 5: return .thursday
-                case 6: return .friday
-                case 7: return .saturday
-                default: return .sunday
-            }
+    private func getDayOfWeekString() -> String{
+        let date = Date()
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: date)
+        switch weekday {
+            case 1: return "Sunday"
+            case 2: return "Monday"
+            case 3: return "Tuesday"
+            case 4: return "Wednesday"
+            case 5: return "Thursday"
+            case 6: return "Friday"
+            case 7: return "Saturday"
+            default: return "Sunday"
         }
+    }
     
     private func getPlan(using inputData: String) -> String {
         if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
-            //print("Widget received data: \(sharedData)")
             return sharedData
         } else {
-            //print("No shared data available")
+            return "unknown"
         }
-        return "none"
     }
 }
 
