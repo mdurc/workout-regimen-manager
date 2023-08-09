@@ -401,7 +401,6 @@ struct ContentView: View {
         }
     }
     
-    
     private func setSharedDataValueOfKey(using inputData: String, and key: String ){
         SharedDataManager.shared.saveData(inputData, forKey: key)
     }
