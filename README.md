@@ -1,6 +1,7 @@
-# text-widget
+# workout-regimen-manager
 
 Default workouts are beginner/intermediate calisthenics exercises
+Simple workout reminder, stopwatch, scheduling app, with an exercise-list display
 
 Displays the workout day (Pull Day, Push Day, Leg Day, Rest Day), inline, on lockscreen, based on the day of the week. Supports inline lockscreen, small, medium, and large widgets. 
 
@@ -10,11 +11,13 @@ Motivation button: Unsplash API is used for random image search. Default search 
 
 Changes automatically based on the day of the week.<br>
 <pre>Default Values:<br>
-    Monday & Thursday: Pull Day<br>
+        Monday & Thursday: Pull Day<br>
         Tuesday & Friday: Push Day<br>
         Wednesday & Saturday: Leg Day<br>
         Sunday: Rest Day
 </pre>
+
+Customizability option which allows user to reorder which weekday has which workout plan, or even create a new workout plan such as "Cardio Day". Data saves the workout based on the workout plan name. So if you add Cardio Day to Monday and edit the workout text, and then add Cardio Day to Tuesday, the text will already be updated as it was on Monday.
 
 <img src="https://github.com/mdurc/text-widget/assets/121322100/5b9668b4-fbe8-4c25-806d-364700860812" alt="inlineLockscreenWidget" width="234" height="506">
 
@@ -22,29 +25,15 @@ Changes automatically based on the day of the week.<br>
 
 <img src="https://github.com/mdurc/text-widget/assets/121322100/587d5fb8-96d2-4ec5-bbd1-6fa003c1ac44" alt="largeAndSmallWidget" width="234" height="506">
 
-https://github.com/mdurc/text-widget/assets/121322100/75bad1f0-39da-43ba-bd15-a9085971061d
 
+https://github.com/mdurc/workout-regimen-manager/assets/121322100/b4f8c080-fa32-4c62-a999-8de767d08add
 
 
 
 # Updates coming soon:
 <ul>
     <li>
-        More customizability, keeping the default calisthenics exercises but adding:
-      <ul>
-        <li>
-          option to reorder workout week (ex. Move Pull Day to Tuesday & Friday, swapping with Push Day)
-        </li>
-        <li>
-          option to separate the days (ex. Make Monday Pull Day and Thursday Rest Day)
-        </li>
-        <li>
-          option to rename workout days (ex. rename 'Leg Day' to 'Cardio')
-        </li>
-        <li>
-          option to add more workout days (Up to 7 maximum different workouts, one per day)
-        </li>
-      </ul>
+        None so far.
     </li>
 
 </ul>

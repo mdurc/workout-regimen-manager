@@ -55,7 +55,7 @@ struct MessageWidgetProvider: TimelineProvider {
         if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
             return sharedData
         } else {
-            return "unknown"
+            return "N/A"
         }
     }
 }

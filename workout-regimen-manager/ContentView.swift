@@ -30,25 +30,24 @@ struct text_widgetApp: App {
             
             
             for (managerKey, managerValue) in manager {
-                let dataToShare = managerValue
-                SharedDataManager.shared.saveData(dataToShare, forKey: managerKey)
+                SharedDataManager.shared.saveData(managerValue, forKey: managerKey)
             }
             
             let pullDay = "3 SETS OF EACH\nScapula Pull ups - 10-12 REPS\nDead Hangs - 15-20 SECONDS\nOne Arm Rows - 12-15 REPS\nFL Raises - 4-6 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPull Ups - 8-10 REPS\nBicep Curls - 8 REPS\nChin Ups - 8-10 REPS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
             let pushDay = "3 SETS OF EACH\nScapula Push-ups - 12-15 REPS\nPlanche Lean - 15-20 SECONDS\nPseudo Planche Pushups - 12-15 REPS\nArcher Pushups - 10-12 REPS\nParallel Bar Dips - 8-10 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPike Push-Ups - 12-15 REPS\nDiamond Push Up - 12-15 REPS\nSide Plank - 45 SECONDS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
             let legDay = "3 SETS OF EACH\nBodyweight Squats - 10 REPS\nBridge Ups - 25 REPS\nLunges - 10 REPS\nArcher Squats - 10 REPS\nHorse Stance - 45 SECONDS\nCalf Raises - 25 REPS\nBulgarian Split Squats - 10-12 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPistol Squats - 5 REPS\nSingle Leg Planks - 30 SECONDS\nHollow Body Holds - MAX ~45-60s"
-            let restDay=""
+            let restDay="Rest"
             
             
-            SharedDataManager.shared.saveData(pullDay, forKey: "pulldayText")
-            SharedDataManager.shared.saveData(pushDay, forKey: "pushdayText")
-            SharedDataManager.shared.saveData(legDay, forKey: "legdayText")
-            SharedDataManager.shared.saveData(restDay, forKey: "restdayText")
+            SharedDataManager.shared.saveData(pullDay, forKey: "Pull DayText")
+            SharedDataManager.shared.saveData(pushDay, forKey: "Push DayText")
+            SharedDataManager.shared.saveData(legDay, forKey: "Leg DayText")
+            SharedDataManager.shared.saveData(restDay, forKey: "Rest DayText")
             
-            SharedDataManager.shared.saveData(pullDay, forKey: "originalpulldayText")
-            SharedDataManager.shared.saveData(pushDay, forKey: "originalpushdayText")
-            SharedDataManager.shared.saveData(legDay, forKey: "originallegdayText")
-            SharedDataManager.shared.saveData(restDay, forKey: "originalrestdayText")
+            SharedDataManager.shared.saveData(pullDay, forKey: "originalPull DayText")
+            SharedDataManager.shared.saveData(pushDay, forKey: "originalPush DayText")
+            SharedDataManager.shared.saveData(legDay, forKey: "originalLeg DayText")
+            SharedDataManager.shared.saveData(restDay, forKey: "originalRest DayText")
             
         }
     }
@@ -357,11 +356,11 @@ struct ContentView: View {
     
     
     private func workoutDayToTextName(using string: String) -> String {
-        return string.lowercased().replacingOccurrences(of: " ", with: "") + "Text"
+        return string + "Text"
     }
     
-    private func weekDayToOriginalTextName(using string: String) -> String {
-        return "original"+string.lowercased().replacingOccurrences(of: " ", with: "") + "Text"
+    private func weekDayToOriginalTextName(using day: String) -> String {
+        return "original" + getSharedDataFromKey(using: day) + "Text"
     }
     
     
@@ -397,7 +396,7 @@ struct ContentView: View {
         if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
             return sharedData
         } else {
-            return "unknown"
+            return "N/A"
         }
     }
     
@@ -558,12 +557,12 @@ private struct CustomPlanPopup: View {
                                     self.focusedField = true
                                 }
                             } else {
-                                Text(getWorkoutDay(day: day))
+                                Text(getData(inputData: day))
                                     .foregroundColor(.gruvboxForeground)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.trailing)
                                     .onTapGesture {
-                                        editableDays[day] = getWorkoutDay(day: day)
+                                        editableDays[day] = getData(inputData: day)
                                     }
                             }
                         }
@@ -580,7 +579,13 @@ private struct CustomPlanPopup: View {
                 HStack{
                     Button("Save") {
                         for (day, editableText) in editableDays {
-                            SharedDataManager.shared.saveData(editableText, forKey: day)
+                            if getData(inputData: (editableText + "Text")) == "N/A" {
+                                SharedDataManager.shared.saveData(editableText, forKey: day)
+                                SharedDataManager.shared.saveData("Example Workout\nExercise 1:\nExercise 2:", forKey: (editableText + "Text"))
+                                SharedDataManager.shared.saveData("Example Workout\nExercise 1:\nExercise 2:", forKey: ("original" + editableText + "Text"))
+                            } else {
+                                SharedDataManager.shared.saveData(editableText, forKey: day)
+                            }
                         }
                         WidgetCenter.shared.reloadAllTimelines()
                         customizingPlan = false
@@ -619,11 +624,11 @@ private struct CustomPlanPopup: View {
         }
     }
     
-    private func getWorkoutDay(day: String) -> String {
-        if let sharedData = SharedDataManager.shared.getData(forKey: day) as? String {
+    private func getData(inputData: String) -> String {
+        if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
             return sharedData
         } else {
-            return "unknown"
+            return "N/A"
         }
     }
 }

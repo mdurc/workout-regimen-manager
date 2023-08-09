@@ -27,7 +27,7 @@ struct MessageWidgetView: View {
     init(message: String) {
         self.message = message
         self.plan = ""
-        self.plan = getPlan(using: getPlan(using: getDayOfWeekString()).lowercased().replacingOccurrences(of: " ", with: "") + "Text")
+        self.plan = getPlan(using: getPlan(using: getDayOfWeekString()) + "Text")
     }
 
 
@@ -144,7 +144,7 @@ struct MessageWidgetView: View {
         if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
             return sharedData
         } else {
-            return "unknown"
+            return "N/A"
         }
     }
 }
