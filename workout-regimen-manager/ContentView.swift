@@ -147,17 +147,12 @@ struct ContentView: View {
                 
                 let numberOfLines = numberOfLines(in: getTextFromWeekDay(using: getDayOfWeekString()))
                 if numberOfLines < 16 {
-                    let linesDifference = 20 - numberOfLines
-                    let paddingTopAdjustment = (CGFloat(linesDifference))>=0 ? 0 : CGFloat(-linesDifference)*2
-                    let paddingBottomAdjustment = (CGFloat(linesDifference)) >= 0 ? 0 : CGFloat(linesDifference)*2
-                    
-
                     Text("\(formattedElapsedTime)")
                         .font(.system(size: 70, design: .monospaced))
                         .foregroundColor(.gruvboxForeground)
                         .frame(width: 400)
-                        .padding(.top, paddingTopAdjustment)
-                        .padding(.bottom, paddingBottomAdjustment)
+                        .padding(.top, -46)
+                        .padding(.bottom, 0)
                 }else{
                     Text("\(formattedElapsedTime)")
                         .font(.system(size: 70, design: .monospaced))
@@ -509,6 +504,10 @@ extension Color {
     static let buttonRed = Color(red: 64/255, green: 33/255, blue: 32/255)
     static let buttonGreen = Color(red: 59/255, green: 68/255, blue: 57/255)
     static let darkerGreenButton = Color(red: 52/255, green: 56/255, blue: 27/255)
+    
+    static let gruvBlue = Color(red: 131/255, green: 165/255, blue: 152/255)
+    static let calTextColor = Color(red: 219/255, green: 174/255, blue: 147/255)
+    
 
     
     init(rgb: (Int, Int, Int)) {

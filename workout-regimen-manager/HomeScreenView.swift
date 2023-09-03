@@ -14,7 +14,7 @@ struct HomeScreenView: View {
             ZStack{
                 Color.gruvboxBackground
                     .edgesIgnoringSafeArea(.all)
-                VStack {
+                VStack(spacing: 30) {
                     Text("Menu")
                         .font(.largeTitle.weight(.bold))
                         .foregroundColor(.redMenu)
@@ -23,6 +23,15 @@ struct HomeScreenView: View {
                     
                     NavigationLink(destination: ContentView()) {
                         Text("Gym Workout")
+                            .font(.system(size:25).weight(.medium))
+                            .foregroundColor(.gruvboxForeground)
+                            .padding(.horizontal, 25)
+                            .padding(.vertical, 10)
+                            .background(Color.buttonBlue)
+                            .cornerRadius(10)
+                    }
+                    NavigationLink(destination: CalendarView()) {
+                        Text("Calender + Log")
                             .font(.system(size:25).weight(.medium))
                             .foregroundColor(.gruvboxForeground)
                             .padding(.horizontal, 25)
