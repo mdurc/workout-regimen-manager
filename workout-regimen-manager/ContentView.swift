@@ -53,7 +53,7 @@ struct text_widgetApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeScreenView()
         }
     }
 }
@@ -82,38 +82,38 @@ struct ContentView: View {
     
     @State private var bindTextDay = ""
 
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
-        
         ZStack {
             Color.gruvboxBackground
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 30) {
-                // Settings button
                 HStack {
                     if isImageVisible {
                         if let imageUrl = imageUrl {
                             RemoteImageView(url: imageUrl)
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 200, height: 200)
+                                .frame(width: 200, height: 100)
                                 .cornerRadius(10)
                                 .onTapGesture {
                                     fetchRandomImage()
                                 }
                                 .offset(y: -50)
-                                .offset(x: 100)
+                                .offset(x: 200)
                                 .padding(-85)
                             
                         } else {
                             Image(systemName: "photo")
                                 .resizable()
-                                .frame(width: 100, height: 100)
+                                .frame(width: 120, height: 100)
                                 .foregroundColor(.gruvboxForeground)
                                 .padding(.top, -85)
                                 .onTapGesture {
                                     fetchRandomImage()
                                 }
-                                .offset(x: 70)
+                                .offset(x: 180)
+                                .offset(y: -50)
                         }
                     }
                     Spacer()
@@ -124,8 +124,8 @@ struct ContentView: View {
                             }
                             .foregroundColor(.gruvboxForeground)
                             .font(.system(size: 40))
-                            .offset(x:-70)
-                            .offset(y: -75)
+                            .offset(x:-285)
+                            .offset(y: -100)
                             .padding(.bottom, -90)
                             .bold()
                     }
@@ -138,17 +138,34 @@ struct ContentView: View {
                             .frame(width: 25, height: 25)
                             .foregroundColor(.gruvboxForeground)
                     }
-                    .offset(y: -50)
+                    .offset(y: -90)
                     .offset(x:-40)
                     
                     
                 }
                 
                 
-                Text("\(formattedElapsedTime)")
-                    .font(.system(size: 70, design: .monospaced))
-                    .foregroundColor(.gruvboxForeground)
-                    .frame(width: 400)
+                let numberOfLines = numberOfLines(in: getTextFromWeekDay(using: getDayOfWeekString()))
+                if numberOfLines < 16 {
+                    let linesDifference = 20 - numberOfLines
+                    let paddingTopAdjustment = (CGFloat(linesDifference))>=0 ? 0 : CGFloat(-linesDifference)*2
+                    let paddingBottomAdjustment = (CGFloat(linesDifference)) >= 0 ? 0 : CGFloat(linesDifference)*2
+                    
+
+                    Text("\(formattedElapsedTime)")
+                        .font(.system(size: 70, design: .monospaced))
+                        .foregroundColor(.gruvboxForeground)
+                        .frame(width: 400)
+                        .padding(.top, paddingTopAdjustment)
+                        .padding(.bottom, paddingBottomAdjustment)
+                }else{
+                    Text("\(formattedElapsedTime)")
+                        .font(.system(size: 70, design: .monospaced))
+                        .foregroundColor(.gruvboxForeground)
+                        .frame(width: 400)
+                        .padding(.top, -70)
+                        .padding(.bottom, -10)
+                }
 
                 HStack(spacing: 20) {
                     
@@ -199,6 +216,17 @@ struct ContentView: View {
                 settingsPopup()
             }
         }
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "chevron.left").font(Font.system(size: 12).weight(.bold)).foregroundColor(.redMenu)
+                    Text("Back").padding(.leading, -5).font(Font.system(size: 15).weight(.bold)).foregroundColor(.redMenu)
+                }
+        })
     }
     
     func fetchRandomImage() {
@@ -370,6 +398,11 @@ struct ContentView: View {
             .bold()
     }
     
+    private func numberOfLines(in text: String) -> Int {
+        let lines = text.components(separatedBy: CharacterSet.newlines)
+        return lines.count
+    }
+    
     private func getDayOfWeekString() -> String{
         let date = Date()
         let calendar = Calendar.current
@@ -467,6 +500,16 @@ extension Color {
     static let gruvboxForeground = Color(red: 235/255, green: 219/255, blue: 178/255)
     static let gruvboxAccent = Color(red: 146/255, green: 131/255, blue: 116/255)
     static let gruvboxSecondary = Color(red: 180/255, green: 98/255, blue: 99/255)
+    static let cyanMenu = Color(red: 7/255, green: 102/255, blue: 120/255)
+    static let purpleMenu = Color(red: 143/255, green: 63/255, blue: 113/255)
+    static let successColor = Color(red: 104/255, green: 157/255, blue: 106/255)
+    static let redMenu = Color(red: 234/255, green: 105/255, blue: 98/255)
+    
+    static let buttonBlue = Color(red: 55/255, green: 65/255, blue: 65/255)
+    static let buttonRed = Color(red: 64/255, green: 33/255, blue: 32/255)
+    static let buttonGreen = Color(red: 59/255, green: 68/255, blue: 57/255)
+    static let darkerGreenButton = Color(red: 52/255, green: 56/255, blue: 27/255)
+
     
     init(rgb: (Int, Int, Int)) {
             let red = Double(rgb.0) / 255.0
@@ -632,4 +675,3 @@ private struct CustomPlanPopup: View {
         }
     }
 }
-
