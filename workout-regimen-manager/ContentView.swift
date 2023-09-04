@@ -9,11 +9,61 @@ import SwiftUI
 import Alamofire
 import AlamofireImage
 import WidgetKit
+import UserNotifications
+
+func checkForPermission() {
+    let notificationCenter = UNUserNotificationCenter.current()
+    notificationCenter.getNotificationSettings { settings in
+        switch settings.authorizationStatus {
+        case .authorized:
+            dispatchNotification()
+        case .denied:
+            return
+        case .notDetermined:
+            notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                if didAllow {
+                    dispatchNotification()
+                }
+            }
+        default:
+            return
+        }
+    }
+}
+    
+
+func dispatchNotification(){
+    let identifier = "workout-notification"
+    let title = "Workout"
+    let body = "Last day today"
+    
+    let notificationCenter = UNUserNotificationCenter.current()
+    
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+    content.sound = .default
+    
+    let calendar = Calendar.current
+    var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
+    dateComponents.hour = 0
+    dateComponents.minute = 0
+    let today = Calendar.current.component(.weekday, from: Date())
+    let sixthDay = today==1 ? 7 : (today + 6) % 7
+    dateComponents.weekday = sixthDay
+    
+    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    
+    notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+    notificationCenter.add(request)
+}
 
 @main
 struct text_widgetApp: App {
     init(){
-        
+        checkForPermission()
+
         let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
         if !hasLaunchedBefore {
             UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
@@ -272,6 +322,7 @@ struct ContentView: View {
                         .background(Color.gruvboxBackground)
                         .onChange(of: submissionString) { newValue in
                             if newValue.hasSuffix("\n") {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                                 searchQuery = submissionString
                                 submissionString = "" // Clear the text
                             }
@@ -318,6 +369,7 @@ struct ContentView: View {
                 
                 HStack(spacing: 20) {
                     Button("Save") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         withAnimation(.easeInOut(duration: 0.3)) {
                             setSharedDataValueOfKey(using: $bindTextDay.wrappedValue, and: workoutDayToTextName(using: getSharedDataFromKey(using: getDayOfWeekString())))
                             setSharedDataValueOfKey(using: getTextFromWeekDay(using: getDayOfWeekString()), and: weekDayToOriginalTextName(using: getDayOfWeekString()))
@@ -333,6 +385,7 @@ struct ContentView: View {
                     
                     
                     Button(action: {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         isShowingSettingsPopup = false
                         setSharedDataValueOfKey(using: getSharedDataFromKey(using: weekDayToOriginalTextName(using: getDayOfWeekString())), and: workoutDayToTextName(using: getSharedDataFromKey(using: getDayOfWeekString())))
                         WidgetCenter.shared.reloadAllTimelines()
@@ -571,7 +624,7 @@ private struct CustomPlanPopup: View {
 
             VStack {
                 Spacer()
-                    .frame(height: 30)
+                    .frame(height: 10)
                 Text("Edit Plan")
                     .font(.headline)
                     .foregroundColor(.gruvboxForeground)
@@ -620,6 +673,7 @@ private struct CustomPlanPopup: View {
                 
                 HStack{
                     Button("Save") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         for (day, editableText) in editableDays {
                             if getData(inputData: (editableText + "Text")) == "N/A" {
                                 SharedDataManager.shared.saveData(editableText, forKey: day)
@@ -630,26 +684,24 @@ private struct CustomPlanPopup: View {
                             }
                         }
                         WidgetCenter.shared.reloadAllTimelines()
-                        customizingPlan = false
-                        isShowingSettingsPopup = false
                     }
                     .foregroundColor(.gruvboxForeground)
                     .padding()
                     .background(Color.gruvboxAccent)
                     .cornerRadius(10)
-                    .offset(y: 10)
+                    .offset(y: -15)
                     
-                    Button("Cancel") {
+                    Button("Close") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         editableDays = originalEditableDays
                         WidgetCenter.shared.reloadAllTimelines()
                         customizingPlan = false
-                        isShowingSettingsPopup = false
                     }
                     .foregroundColor(.gruvboxForeground)
                     .padding()
                     .background(Color.gruvboxAccent)
                     .cornerRadius(10)
-                    .offset(y: 10)
+                    .offset(y: -15)
                     
                 }
 

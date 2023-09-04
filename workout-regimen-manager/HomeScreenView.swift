@@ -39,6 +39,15 @@ struct HomeScreenView: View {
                             .background(Color.buttonBlue)
                             .cornerRadius(10)
                     }
+                    NavigationLink(destination: CardioView()) {
+                        Text("Cardio Workout")
+                            .font(.system(size:25).weight(.medium))
+                            .foregroundColor(.gruvboxForeground)
+                            .padding(.horizontal, 25)
+                            .padding(.vertical, 10)
+                            .background(Color.buttonBlue)
+                            .cornerRadius(10)
+                    }
                     Spacer()
                 }
             }

@@ -12,6 +12,7 @@
 		D798173A2A801F93009E6F96 /* MessageWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79817392A801F93009E6F96 /* MessageWidgetView.swift */; };
 		D7BCDE112AA40E4500B50462 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BCDE102AA40E4500B50462 /* HomeScreenView.swift */; };
 		D7BCDE172AA4D36B00B50462 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BCDE162AA4D36B00B50462 /* CalendarView.swift */; };
+		D7BCDE1B2AA5525900B50462 /* CardioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BCDE1A2AA5525900B50462 /* CardioView.swift */; };
 		D7C64E942A816D8100B8E967 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C64E932A816D8100B8E967 /* SharedDataManager.swift */; };
 		D7C64E952A816D8100B8E967 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C64E932A816D8100B8E967 /* SharedDataManager.swift */; };
 		D7FC5EE82A801A1200EC23BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FC5EE72A801A1200EC23BB /* ContentView.swift */; };
@@ -57,6 +58,7 @@
 		D79817392A801F93009E6F96 /* MessageWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageWidgetView.swift; sourceTree = "<group>"; };
 		D7BCDE102AA40E4500B50462 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		D7BCDE162AA4D36B00B50462 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		D7BCDE1A2AA5525900B50462 /* CardioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardioView.swift; sourceTree = "<group>"; };
 		D7C64E932A816D8100B8E967 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
 		D7FC5EE22A801A1200EC23BB /* workout-regimen-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "workout-regimen-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7FC5EE72A801A1200EC23BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				D7BCDE102AA40E4500B50462 /* HomeScreenView.swift */,
 				D7FC5EE72A801A1200EC23BB /* ContentView.swift */,
 				D7BCDE162AA4D36B00B50462 /* CalendarView.swift */,
+				D7BCDE1A2AA5525900B50462 /* CardioView.swift */,
 				D7FC5EE92A801A1300EC23BB /* Assets.xcassets */,
 				D7FC5EEB2A801A1300EC23BB /* Preview Content */,
 			);
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7BCDE1B2AA5525900B50462 /* CardioView.swift in Sources */,
 				D7BCDE172AA4D36B00B50462 /* CalendarView.swift in Sources */,
 				D7FC5EE82A801A1200EC23BB /* ContentView.swift in Sources */,
 				D7C64E942A816D8100B8E967 /* SharedDataManager.swift in Sources */,
@@ -422,6 +426,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "workout-regimen-manager/workout-regimen-manager.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"workout-regimen-manager/Preview Content\"";
@@ -442,6 +447,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.workout-regimen-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -456,6 +462,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "workout-regimen-manager/workout-regimen-manager.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"workout-regimen-manager/Preview Content\"";
@@ -476,6 +483,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "mdurcan.workout-regimen-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
