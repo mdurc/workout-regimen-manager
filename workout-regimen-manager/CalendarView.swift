@@ -18,6 +18,7 @@ struct CalendarView: View {
     @State private var currentDate = Date()
     @State private var displayDate = Date()
     @State private var completedWorkout = didCompleteWorkout(date: Date())
+    @State private var yOffset: CGFloat = 0.0
     var body: some View {
         ZStack(alignment: .top) {
             Color.gruvboxBackground
@@ -70,7 +71,23 @@ struct CalendarView: View {
                     .foregroundColor(.gruvboxForeground)
                     .fontWeight(.heavy)
                 EditableTextArea(textDataManager: TextDataManager(displayDate: displayDate))
+                    .onTapGesture {
+                        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
+                            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                                var changeY : CGFloat = 0
+                                if(keyboardSize.height>110){//size of computer keyboard
+                                    changeY = keyboardSize.height
+                                }
+                                yOffset = -(changeY/2)
+                            }
+                        }
+                        
+                        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+                            yOffset = 0
+                        }
+                    }
             }
+            .offset(y: yOffset)
         }
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
@@ -88,6 +105,9 @@ struct CalendarView: View {
             (displayDate, displayDate) = (Date(), displayDate)
         }
         
+    }
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
@@ -232,6 +252,8 @@ private struct EditableTextArea: View {
     var body: some View {
         VStack {
             TextEditor(text: $textDataManager.text)
+                .frame(minWidth: 350, maxWidth: 350, minHeight: 270, maxHeight: 270)
+                .fixedSize()
                 .scrollContentBackground(.hidden)
                 .foregroundColor(.gruvboxForeground)
                 .background(Color.gruvboxBackground)

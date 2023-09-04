@@ -105,6 +105,7 @@ struct text_widgetApp: App {
         WindowGroup {
             HomeScreenView()
         }
+        
     }
 }
 
