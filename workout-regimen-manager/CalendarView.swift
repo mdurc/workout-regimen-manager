@@ -146,10 +146,8 @@ struct CalendarMonthView: View {
     }
     
     func monthDates() -> [Date] {
-        // Calculate the first day of the month
         var startDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: displayDate))!
         
-        // Calculate the last day of the month
         let endDate = Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: startDate)!
         
         var dates: [Date] = []
@@ -173,7 +171,7 @@ struct CalendarDayView: View {
         Text("\(Calendar.current.component(.day, from: date))")
             .frame(width: 30, height: 30)
             .overlay(
-                RoundedRectangle(cornerRadius: 10) // Adjust the cornerRadius as needed
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(isDisplayDate(date: date) ? .gruvboxForeground : Color.clear, lineWidth: isDisplayDate(date: date) ? 4 : 0)
             )
             .background(
@@ -214,14 +212,12 @@ struct CalendarDayView: View {
     }
     
     func isCurrentDate(date: Date) -> Bool {
-        // Specify the month, day, and year for the date you want to highlight
         let specificDateComponents = Calendar.current.dateComponents([.month, .day, .year], from: date)
         let targetDateComponents = Calendar.current.dateComponents([.month, .day, .year], from: currentDate)
         
         return specificDateComponents == targetDateComponents
     }
     func isDisplayDate(date: Date) -> Bool {
-        // Specify the month, day, and year for the date you want to highlight
         let specificDateComponents = Calendar.current.dateComponents([.month, .day, .year], from: date)
         let targetDateComponents = Calendar.current.dateComponents([.month, .day, .year], from: displayDate)
         
@@ -264,7 +260,6 @@ class TextDataManager: ObservableObject, Equatable {
 
     init(displayDate: Date) {
         self.displayDate = displayDate
-        // Initialize the text property when the object is created
         if let storedText = SharedDataManager.shared.getData(forKey: "\(Calendar.current.dateComponents([.year, .month, .day], from: displayDate))") as? String {
             self.text = storedText
         }else{
@@ -273,7 +268,6 @@ class TextDataManager: ObservableObject, Equatable {
     }
 
     func saveText() {
-        // Save the text data using SharedDataManager
         SharedDataManager.shared.saveData(text, forKey: "\(Calendar.current.dateComponents([.year, .month, .day], from: displayDate))")
     }
 }

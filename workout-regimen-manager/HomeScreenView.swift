@@ -40,7 +40,7 @@ struct HomeScreenView: View {
                             .cornerRadius(10)
                     }
                     NavigationLink(destination: CardioView()) {
-                        Text("Cardio Workout")
+                        Text("Cardio Workout ")
                             .font(.system(size:25).weight(.medium))
                             .foregroundColor(.gruvboxForeground)
                             .padding(.horizontal, 25)
