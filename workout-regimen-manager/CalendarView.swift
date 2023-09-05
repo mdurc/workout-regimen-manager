@@ -72,19 +72,7 @@ struct CalendarView: View {
                     .fontWeight(.heavy)
                 EditableTextArea(textDataManager: TextDataManager(displayDate: displayDate))
                     .onTapGesture {
-                        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
-                            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                                var changeY : CGFloat = 0
-                                if(keyboardSize.height>110){//size of computer keyboard
-                                    changeY = keyboardSize.height
-                                }
-                                yOffset = -(changeY/2)
-                            }
-                        }
-                        
-                        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-                            yOffset = 0
-                        }
+                        yOffset = -(336/2)
                     }
             }
             .offset(y: yOffset)
@@ -102,6 +90,7 @@ struct CalendarView: View {
         })
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+            yOffset = 0
             (displayDate, displayDate) = (Date(), displayDate)
         }
         

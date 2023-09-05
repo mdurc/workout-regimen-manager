@@ -262,7 +262,6 @@ struct CardioView: View {
                 title: Text("End Run Confirmation"),
                 message: Text("Would you like to log this run for \n\(formattedDate())?"),
                 primaryButton: .default(Text("Yes")) {
-                    print(runData)
                     logRun()
                 },
                 secondaryButton: .cancel(Text("No")) {
