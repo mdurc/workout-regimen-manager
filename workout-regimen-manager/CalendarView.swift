@@ -95,6 +95,11 @@ struct CalendarView: View {
             yOffset = 0
             (displayDate, displayDate) = (Date(), displayDate)
         }
+        .onAppear(){
+            if let storedText = SharedDataManager.shared.getData(forKey: "\(Calendar.current.dateComponents([.year, .month, .day], from: displayDate))") as? String {
+                bindedText = storedText
+            }
+        }
         
     }
     func hideKeyboard() {
