@@ -19,6 +19,7 @@ struct CalendarView: View {
     @State private var displayDate = Date()
     @State private var completedWorkout = didCompleteWorkout(date: Date())
     @State private var yOffset: CGFloat = 0.0
+    @State private var bindedText = ""
     var body: some View {
         ZStack(alignment: .top) {
             Color.gruvboxBackground
@@ -67,10 +68,11 @@ struct CalendarView: View {
                 
                 CalendarMonthView(currentDate: $currentDate, displayDate: $displayDate, completedWorkout: $completedWorkout)
                 
+                @ObservedObject var textDataManager = TextDataManager(displayDate: displayDate)
                 Text("Journal Entry: \(Calendar.current.component(.month, from: displayDate))/\(Calendar.current.component(.day, from: displayDate))/\(Calendar.current.component(.year, from: displayDate)%100)")
                     .foregroundColor(.gruvboxForeground)
                     .fontWeight(.heavy)
-                EditableTextArea(textDataManager: TextDataManager(displayDate: displayDate))
+                EditableTextArea(textDataManager: textDataManager, bindedText : $bindedText)
                     .onTapGesture {
                         yOffset = -(336/2)
                     }
@@ -237,13 +239,22 @@ struct CalendarDayView: View {
 
 private struct EditableTextArea: View {
     @ObservedObject var textDataManager: TextDataManager
-
+    
+    @Binding var bindedText: String
+    
+    init(textDataManager: TextDataManager, bindedText: Binding<String>) {
+        self.textDataManager = textDataManager
+        self._bindedText = bindedText
+    }
+    
+    
     var body: some View {
         VStack {
-            TextEditor(text: $textDataManager.text)
+            TextEditor(text: $bindedText)
                 .frame(minWidth: 350, maxWidth: 350, minHeight: 270, maxHeight: 270)
                 .fixedSize()
                 .scrollContentBackground(.hidden)
+                .disableAutocorrection(true)
                 .foregroundColor(.gruvboxForeground)
                 .background(Color.gruvboxBackground)
                 .padding()
@@ -253,7 +264,11 @@ private struct EditableTextArea: View {
                         .padding(.leading, 5)
                         .padding(.trailing, 5)
                 )
-                .onChange(of: textDataManager.text) { _ in
+                .onChange(of: textDataManager.text) { newValue in
+                    bindedText = newValue
+                }
+                .onChange(of: bindedText) { newValue in
+                    textDataManager.text = newValue
                     textDataManager.saveText()
                 }
         }

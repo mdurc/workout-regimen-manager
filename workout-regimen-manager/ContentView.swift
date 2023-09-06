@@ -245,7 +245,7 @@ struct ContentView: View {
                 }
                 
 
-                // Workout List
+                //Workout List
                 VStack(spacing: 10) {
                     Text(getSharedDataFromKey(using: getDayOfWeekString()).uppercased())
                             .foregroundColor(.gruvboxForeground)
@@ -318,6 +318,7 @@ struct ContentView: View {
                         .frame(width:120, height: 35)
                         .offset(x:-5)
                         .autocapitalization(.none)
+                        .disableAutocorrection(true)
                         .scrollContentBackground(.hidden)
                         .foregroundColor(.gruvboxAccent)
                         .background(Color.gruvboxBackground)
@@ -325,7 +326,7 @@ struct ContentView: View {
                             if newValue.hasSuffix("\n") {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                                 searchQuery = submissionString
-                                submissionString = "" // Clear the text
+                                submissionString = "" //Clear the text
                             }
                         }
                     Button(action: {

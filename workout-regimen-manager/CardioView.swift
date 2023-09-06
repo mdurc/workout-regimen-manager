@@ -67,7 +67,7 @@ struct CardioView: View {
                         }
                         .overlay(
                             Button(action: {
-                                // Get the user's current location and center the map on it
+                                //Get the user's current location and center the map on it
                                 if let userLocation = locationManager.location?.coordinate {
                                     region.center = userLocation
                                 }
@@ -110,7 +110,6 @@ struct CardioView: View {
                 VStack{
                     
                     HStack {
-                        // Time Box
                         VStack {
                             Text("Time")
                                 .font(.headline)
@@ -138,7 +137,6 @@ struct CardioView: View {
                     }
                     
                     HStack {
-                        // Time Box
                         VStack {
                             Text("Average Pace")
                                 .font(.headline)
@@ -184,7 +182,7 @@ struct CardioView: View {
                             startTracking()
                         }
                     }) {
-                        Text(isRunning ? "Pause Run" : "Start Run")
+                        Text(isRunning ? "Pause Run" : " Start Run ")
                             .foregroundColor(.gruvboxForeground)
                             .padding(.horizontal, 25)
                             .padding(.vertical, 10)
@@ -193,6 +191,8 @@ struct CardioView: View {
                     }
                     .font(.system(size:22))
                     .padding(.top, 16)
+                    .padding(.leading, 30)
+                    Spacer()
                     
                     
                     if(startedRun){
@@ -228,7 +228,7 @@ struct CardioView: View {
                             locationManagerDelegate.resetTracking()
                             paceCalculator.resetPace()
                         }) {
-                            Text("End Run")
+                            Text("  End Run  ")
                                 .foregroundColor(.gruvboxForeground)
                                 .padding(.horizontal, 25)
                                 .padding(.vertical, 10)
@@ -237,7 +237,7 @@ struct CardioView: View {
                         }
                         .font(.system(size:22))
                         .padding(.top, 16)
-                        
+                        .padding(.trailing, 30)
                     }
                 }
                 
@@ -318,7 +318,7 @@ struct CardioView: View {
     
     private var timeDateCurrent: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a" // Format for displaying time as "hh:mm AM/PM"
+        dateFormatter.dateFormat = "hh:mm a" //Format default displaying time as "hh:mm AM/PM"
         return dateFormatter.string(from: Date())
     }
     
@@ -359,7 +359,7 @@ struct CardioView: View {
 
     private func formattedDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy" // Format for displaying the date
+        dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: Date())
     }
 }
@@ -376,7 +376,7 @@ class LocationManagerDelegate: NSObject, ObservableObject, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
 
-        if !isPaused { // Check if the timer is not paused
+        if !isPaused {
             if(resetLocation){
                 lastLocation = location
             }
@@ -388,7 +388,7 @@ class LocationManagerDelegate: NSObject, ObservableObject, CLLocationManagerDele
                 if elevationTracking {
                     if location.altitude > lastLocation.altitude {
                         let elevationChange = location.altitude - lastLocation.altitude
-                        let elevationChangeRounded = (elevationChange * 10).rounded(.down) / 10 // Round to lowest 0.1 increment
+                        let elevationChangeRounded = (elevationChange * 10).rounded(.down) / 10 //Round to lowest 0.1 increment
                         elevationGain += elevationChangeRounded
                     }
                 }
@@ -429,7 +429,7 @@ class PaceCalculator: ObservableObject {
     
     func updatePaceIfNeeded(elapsedTime: Double, miles: Double) -> String {
         if miles > 0 && elapsedTime > 0 {
-            // Calculate pace for the current update
+            //Calculate pace for the current update
             let pace = (elapsedTime / 60) / miles
             let paceMinutes = Int(pace)
             let paceSeconds = Int((pace - Double(paceMinutes)) * 60)
