@@ -35,7 +35,7 @@ func checkForPermission() {
 func dispatchNotification(){
     let identifier = "workout-notification"
     let title = "Workout"
-    let body = "Last day today"
+    let body = "Go workout"
     
     let notificationCenter = UNUserNotificationCenter.current()
     
@@ -46,13 +46,10 @@ func dispatchNotification(){
     
     let calendar = Calendar.current
     var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
-    dateComponents.hour = 0
+    dateComponents.hour = 8
     dateComponents.minute = 0
-    let today = Calendar.current.component(.weekday, from: Date())
-    let sixthDay = today==1 ? 7 : (today + 6) % 7
-    dateComponents.weekday = sixthDay
     
-    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
     let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
     
     notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
@@ -118,7 +115,10 @@ struct ContentView: View {
     @State private var isRunning = false
     @State private var isShowingSettingsPopup = false
     @State private var customizingPlan = false
+    @State private var viewPlans = false
+    
     @State private var hasEdits = false
+    @State private var noEditsFromCustomize = false
     
     @State private var isImageVisible = false
     @State private var motivationText = "Show Motivation"
@@ -132,6 +132,7 @@ struct ContentView: View {
     @State private var day = ""
     
     @State private var bindTextDay = ""
+    @State var keys = SharedDataManager.shared.keysEndingWithText()
 
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
@@ -258,6 +259,7 @@ struct ContentView: View {
                 
             }
             .padding(.top,100)
+            
             if isShowingSettingsPopup{
                 settingsPopup()
             }
@@ -366,7 +368,7 @@ struct ContentView: View {
                     .background(Color.gruvboxAccent)
                     .cornerRadius(5)
                 }
-                    EditableTextArea(text: $bindTextDay, hasEdits: $hasEdits)
+                EditableTextArea(text: $bindTextDay, hasEdits: $hasEdits, noEditsFromCustomize: $noEditsFromCustomize)
                 
                 
                 HStack(spacing: 20) {
@@ -387,7 +389,6 @@ struct ContentView: View {
                     
                     
                     Button(action: {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         isShowingSettingsPopup = false
                         setSharedDataValueOfKey(using: getSharedDataFromKey(using: weekDayToOriginalTextName(using: getDayOfWeekString())), and: workoutDayToTextName(using: getSharedDataFromKey(using: getDayOfWeekString())))
                         WidgetCenter.shared.reloadAllTimelines()
@@ -402,21 +403,29 @@ struct ContentView: View {
                     .background(Color.gruvboxAccent)
                     .cornerRadius(10)
                     
-                    Button("Customize Plan") {
-                        customizingPlan = true
+                    VStack{
+                        Button("Customize Plan") {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            customizingPlan = true
+                            //auto save any edits, when entering customizing plan view
+                            setSharedDataValueOfKey(using: $bindTextDay.wrappedValue, and: workoutDayToTextName(using: getSharedDataFromKey(using: getDayOfWeekString())))
+                            setSharedDataValueOfKey(using: getTextFromWeekDay(using: getDayOfWeekString()), and: weekDayToOriginalTextName(using: getDayOfWeekString()))
+                            hasEdits = false
+                        }
+                        .foregroundColor(.gruvboxForeground)
+                        .padding(10)
+                        .background(Color.gruvboxAccent)
+                        .cornerRadius(10)
                         
-                        setSharedDataValueOfKey(using: $bindTextDay.wrappedValue, and: workoutDayToTextName(using: getSharedDataFromKey(using: getDayOfWeekString())))
-                        setSharedDataValueOfKey(using: getTextFromWeekDay(using: getDayOfWeekString()), and: weekDayToOriginalTextName(using: getDayOfWeekString()))
-                        
-                        hasEdits = false
-                        WidgetCenter.shared.reloadAllTimelines()
-                        
-                        
+                        Button("View Plans") {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            viewPlans = true
+                        }
+                        .foregroundColor(.gruvboxForeground)
+                        .padding(10)
+                        .background(Color.gruvboxAccent)
+                        .cornerRadius(10)
                     }
-                    .foregroundColor(.gruvboxForeground)
-                    .padding()
-                    .background(Color.gruvboxAccent)
-                    .cornerRadius(10)
                     
 
                     
@@ -427,7 +436,9 @@ struct ContentView: View {
             .background(Color.gruvboxBackground)
             .cornerRadius(10)
             if customizingPlan {
-                CustomPlanPopup(customizingPlan: $customizingPlan, isShowingSettingsPopup: $isShowingSettingsPopup)
+                CustomPlanPopup(customizingPlan: $customizingPlan, isShowingSettingsPopup: $isShowingSettingsPopup, bindTextDay: $bindTextDay, noEditsFromCustomize: $noEditsFromCustomize)
+            }else if viewPlans {
+                viewPlanPopup(viewPlans: $viewPlans, keys: $keys, noEditsFromCustomize: $noEditsFromCustomize, bindedDayText: $bindTextDay)
             }
         }
     }
@@ -446,6 +457,8 @@ struct ContentView: View {
         Text(text)
             .foregroundColor(.gruvboxForeground)
             .bold()
+            .lineLimit(nil)
+            .frame(width: 370)
     }
     
     private func numberOfLines(in text: String) -> Int {
@@ -471,7 +484,6 @@ struct ContentView: View {
     
     private func getTextFromWeekDay(using day: String) -> String {
         let textkey = workoutDayToTextName(using: getSharedDataFromKey(using: day))
-        
         return getSharedDataFromKey(using: textkey)
     }
     
@@ -490,8 +502,7 @@ struct ContentView: View {
     private struct EditableTextArea: View {
         @Binding var text: String
         @Binding var hasEdits: Bool
-        
-        
+        @Binding var noEditsFromCustomize: Bool
         
 
         var body: some View {
@@ -507,6 +518,10 @@ struct ContentView: View {
                     )
                     .onChange(of: text) { _ in
                         hasEdits = true
+                        if noEditsFromCustomize{
+                            hasEdits = false
+                            noEditsFromCustomize = false
+                        }
                     }
 
                 Divider()
@@ -557,7 +572,7 @@ extension Color {
     
     static let buttonBlue = Color(red: 55/255, green: 65/255, blue: 65/255)
     static let buttonRed = Color(red: 64/255, green: 33/255, blue: 32/255)
-    static let buttonGreen = Color(red: 59/255, green: 68/255, blue: 57/255)
+    static let buttonGreen = Color(red: 111/255, green: 194/255, blue: 118/255)
     static let darkerGreenButton = Color(red: 52/255, green: 56/255, blue: 27/255)
     
     static let gruvBlue = Color(red: 131/255, green: 165/255, blue: 152/255)
@@ -608,9 +623,233 @@ struct UnsplashResponse: Codable {
 }
 
 
+
+private struct viewPlanPopup: View {
+    @Binding var viewPlans: Bool
+    @Binding var keys: [String]
+    @Binding var noEditsFromCustomize: Bool
+    @Binding var bindedDayText: String
+    
+    @State var currKey = "N/A"
+    @State var tempKey = ""
+    @State var currentWorkoutDayKey = ""
+    
+    @State var text = "None"
+    
+    @State private var newName = ""
+    @State private var showingAlert = false
+    
+    
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
+            
+            
+            VStack(spacing: 20){
+                HStack(spacing: 10){
+                    LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], spacing: 10) {
+                        ForEach(keys, id: \.self) { key in
+                            Text("\(String(key.dropLast(4)))")
+                                .font(.system(size: 15))
+                                .fontWeight(.heavy)
+                                .foregroundColor(.gruvboxForeground)
+                                .onTapGesture {
+                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                                    currKey = key
+                                    if let textData = SharedDataManager.shared.getData(forKey: currKey) as? String {
+                                        text = textData
+                                    } else {
+                                        text = "None"
+                                    }
+                                }
+                        }
+                    }
+                }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gruvboxSecondary, lineWidth: 1)
+                )
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                }
+                
+                
+                
+                HStack{
+                    Text("\(String(currKey.dropLast(4)))")
+                        .font(.system(size: 20))
+                        .fontWeight(.heavy)
+                        .foregroundColor(.gruvboxForeground)
+                    
+                    Spacer()
+                    
+                    Button("Add New") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                        
+                        showingAlert.toggle()
+                    }
+                    .foregroundColor(.gruvboxBackground)
+                    .padding(5)
+                    .background(Color.buttonGreen)
+                    .cornerRadius(10)
+                    .bold()
+                    .alert("Enter new workout name", isPresented: $showingAlert) {
+                        TextField("New workout name", text: $newName)
+                            .disableAutocorrection(true)
+                        Button("Save", action: submitNewWorkout)
+                    }
+                    
+                    
+                    Button("Delete") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                        
+                        if keys.count > 1{
+                            guard let index = keys.firstIndex(of: currKey) else {
+                                return
+                            }
+                            
+                            if index > 0 {
+                                tempKey = keys[index - 1]
+                            } else if index < keys.count - 1 {
+                                
+                                tempKey = keys[index + 1]
+                            }
+                            
+                            if let textData = SharedDataManager.shared.getData(forKey: tempKey) as? String {
+                                text = textData
+                            } else {
+                                text = "None"
+                            }
+                            
+                            SharedDataManager.shared.removeData(forKey: currKey)
+                            SharedDataManager.shared.removeData(forKey: "original"+currKey)
+                            
+                            keys = SharedDataManager.shared.keysEndingWithText()
+                            
+                            currKey = tempKey
+                            
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
+                    }
+                    .foregroundColor(.gruvboxBackground)
+                    .padding(5)
+                    .background(Color.gruvboxSecondary)
+                    .cornerRadius(10)
+                    .bold()
+                }
+                
+                
+                VStack {
+                    TextEditor(text: $text)
+                        .scrollContentBackground(.hidden)
+                        .foregroundColor(.gruvboxForeground)
+                        .background(Color.gruvboxBackground)
+                        .padding()
+                        .scrollContentBackground(.hidden)
+                        .frame(minWidth: 370)
+                        .frame(minHeight: 200)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color(rgb: (235,219,178)), lineWidth: 1)
+                        )
+                        .onChange(of: text) { _ in
+                            noEditsFromCustomize = true
+                            SharedDataManager.shared.saveData(text, forKey: currKey)
+                            SharedDataManager.shared.saveData(text, forKey: ("original"+currKey))
+                            if currentWorkoutDayKey == currKey{
+                                bindedDayText = text
+                            }
+                        }
+                    Divider()
+                }
+                
+                
+            
+                Button("Close") {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                    viewPlans = false
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                .foregroundColor(.gruvboxForeground)
+                .padding()
+                .background(Color.buttonBlue)
+                .cornerRadius(10)
+                .bold()
+            }
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+            }
+            .padding(100)
+            .padding(.top, 100)
+            .padding(.bottom, 200)
+            .background(Color.gruvboxBackground)
+            .cornerRadius(10)
+        }
+        .onAppear(){
+            keys = SharedDataManager.shared.keysEndingWithText()
+            print(SharedDataManager.shared.returnAllKeys())
+            print(SharedDataManager.shared.returnAllKeys().count)
+            if let sharedData = SharedDataManager.shared.getData(forKey: getDayOfWeekString()) as? String {
+                currKey = sharedData + "Text"
+                currentWorkoutDayKey = currKey
+                
+                addCurrentToKeys(textFieldData: bindedDayText, keyName: String(currentWorkoutDayKey.dropLast(4)))
+                
+                if let textData = SharedDataManager.shared.getData(forKey: currKey) as? String {
+                    text = textData
+                } else {
+                    text = "None"
+                }
+            } else {
+                currKey = "N/A"
+                text = "None"
+            }
+        }
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+        }
+    }
+    func getDayOfWeekString() -> String{
+        let date = Date()
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: date)
+        switch weekday {
+            case 1: return "Sunday"
+            case 2: return "Monday"
+            case 3: return "Tuesday"
+            case 4: return "Wednesday"
+            case 5: return "Thursday"
+            case 6: return "Friday"
+            case 7: return "Saturday"
+            default: return "Sunday"
+        }
+    }
+    
+    func submitNewWorkout() {
+        addCurrentToKeys(keyName: newName)
+    }
+    
+    func addCurrentToKeys(textFieldData: String = "New Workout List:", keyName: String){
+        if(!keys.contains(keyName+"Text")){
+            SharedDataManager.shared.saveData(textFieldData, forKey: keyName+"Text")
+            SharedDataManager.shared.saveData(textFieldData, forKey: "original"+keyName+"Text")
+        }
+        keys = SharedDataManager.shared.keysEndingWithText()
+        newName = ""
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+}
+
+
+
+
 private struct CustomPlanPopup: View {
     @Binding var customizingPlan: Bool
     @Binding var isShowingSettingsPopup: Bool
+    @Binding var bindTextDay: String
+    @Binding var noEditsFromCustomize: Bool
     
     let daysOfWeek = ["Monday", "Thursday", "Tuesday", "Friday", "Wednesday", "Saturday", "Sunday"]
     @State private var editableDays: [String: String] = [:]
@@ -694,10 +933,11 @@ private struct CustomPlanPopup: View {
                     .offset(y: -15)
                     
                     Button("Close") {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         editableDays = originalEditableDays
                         WidgetCenter.shared.reloadAllTimelines()
                         customizingPlan = false
+                        bindTextDay = getWorkoutDayData(inputData: getDayOfWeekString())
+                        noEditsFromCustomize = true
                     }
                     .foregroundColor(.gruvboxForeground)
                     .padding()
@@ -720,7 +960,34 @@ private struct CustomPlanPopup: View {
         }
     }
     
-    private func getData(inputData: String) -> String {
+    func getDayOfWeekString() -> String{
+        let date = Date()
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: date)
+        switch weekday {
+            case 1: return "Sunday"
+            case 2: return "Monday"
+            case 3: return "Tuesday"
+            case 4: return "Wednesday"
+            case 5: return "Thursday"
+            case 6: return "Friday"
+            case 7: return "Saturday"
+            default: return "Sunday"
+        }
+    }
+    
+    func getWorkoutDayData(inputData: String) -> String{
+        if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
+            if let sharedDatatwo = SharedDataManager.shared.getData(forKey: sharedData+"Text") as? String {
+                return sharedDatatwo
+            } else{
+                return "N/A"
+            }
+        } else {
+            return "N/A"
+        }
+    }
+    func getData(inputData: String) -> String {
         if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
             return sharedData
         } else {
