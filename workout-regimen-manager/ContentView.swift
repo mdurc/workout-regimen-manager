@@ -67,12 +67,12 @@ struct text_widgetApp: App {
             
             @State var manager = [
                 "Sunday": "Rest Day",
-                "Monday": "Pull Day",
+                "Monday": "Leg Day",
                 "Tuesday": "Push Day",
-                "Wednesday": "Leg Day",
-                "Thursday": "Pull Day",
+                "Wednesday": "Pull Day",
+                "Thursday": "Leg Day",
                 "Friday": "Push Day",
-                "Saturday": "Leg Day"
+                "Saturday": "Pull Day"
             ]
             
             
@@ -80,11 +80,10 @@ struct text_widgetApp: App {
                 SharedDataManager.shared.saveData(managerValue, forKey: managerKey)
             }
             
-            let pullDay = "3 SETS OF EACH\nScapula Pull ups - 10-12 REPS\nDead Hangs - 15-20 SECONDS\nOne Arm Rows - 12-15 REPS\nFL Raises - 4-6 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPull Ups - 8-10 REPS\nBicep Curls - 8 REPS\nChin Ups - 8-10 REPS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
-            let pushDay = "3 SETS OF EACH\nScapula Push-ups - 12-15 REPS\nPlanche Lean - 15-20 SECONDS\nPseudo Planche Pushups - 12-15 REPS\nArcher Pushups - 10-12 REPS\nParallel Bar Dips - 8-10 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPike Push-Ups - 12-15 REPS\nDiamond Push Up - 12-15 REPS\nSide Plank - 45 SECONDS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
-            let legDay = "3 SETS OF EACH\nBodyweight Squats - 10 REPS\nBridge Ups - 25 REPS\nLunges - 10 REPS\nArcher Squats - 10 REPS\nHorse Stance - 45 SECONDS\nCalf Raises - 25 REPS\nBulgarian Split Squats - 10-12 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPistol Squats - 5 REPS\nSingle Leg Planks - 30 SECONDS\nHollow Body Holds - MAX ~45-60s"
+            let pullDay = "Calisthenics: 3 Sets of each, or 3 circuits\n--------\nScapula Pull ups - 10-12 REPS\nDead Hangs - 15-20 SECONDS\nOne Arm Rows - 12-15 REPS\nFL Raises - 4-6 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPull Ups - 8-10 REPS\nBicep Curls - 8 REPS\nChin Ups - 8-10 REPS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
+            let pushDay = "Calisthenics: 3 Sets of each, or 3 circuits\n--------\nScapula Push-ups - 12-15 REPS\nPlanche Lean - 15-20 SECONDS\nPseudo Planche Pushups - 12-15 REPS\nArcher Pushups - 10-12 REPS\nParallel Bar Dips - 8-10 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPike Push-Ups - 12-15 REPS\nDiamond Push Up - 12-15 REPS\nSide Plank - 45 SECONDS\nWall Handstand - 30 SECONDS\nHollow Body Hold - MAX ~45-60s"
+            let legDay = "Calisthenics: 3 Sets of each, or 3 circuits\n--------\nBodyweight Squats - 10 REPS\nBridge Ups - 25 REPS\nLunges - 10 REPS\nArcher Squats - 10 REPS\nHorse Stance - 45 SECONDS\nCalf Raises - 25 REPS\nBulgarian Split Squats - 10-12 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPistol Squats - 5 REPS\nSingle Leg Planks - 30 SECONDS\nHollow Body Holds - MAX ~45-60s"
             let restDay="Rest"
-            
             
             SharedDataManager.shared.saveData(pullDay, forKey: "Pull DayText")
             SharedDataManager.shared.saveData(pushDay, forKey: "Push DayText")
@@ -96,6 +95,18 @@ struct text_widgetApp: App {
             SharedDataManager.shared.saveData(legDay, forKey: "originalLeg DayText")
             SharedDataManager.shared.saveData(restDay, forKey: "originalRest DayText")
             
+            
+            let pullGym = "Gym: 3 SETS OF EACH\n--------\nMachine bench\nFly machine push\nChest machine push out\nTricep overhead\nLateral raises, cable\nDumbbell overhead press\nDips (2 sets Chest, 2 sets Tricep)\nPush-ups\nAbs"
+            let pushGym = "Gym: 3 SETS OF EACH\n--------\nPull ups\nChin ups\nDumbbell rows or Shoulder Press\nLat pull-down wide\nCable sitting rows\nRear felt fly\nBicep curls/ preacher curls\nCross hammer curls\nAbs"
+            let legGym = "Gym: 3 SETS OF EACH\n--------\nLeg press\nLeg lift extension for thighs\nLeg curls for hamstrings\nCalves\nLeg abductors and adductors\nBulgarian Split Squats / Pistol squats"
+            
+            SharedDataManager.shared.saveData(pullGym, forKey: "Pull GymText")
+            SharedDataManager.shared.saveData(pushGym, forKey: "Push GymText")
+            SharedDataManager.shared.saveData(legGym, forKey: "Leg GymText")
+            
+            SharedDataManager.shared.saveData(pullGym, forKey: "originalPull GymText")
+            SharedDataManager.shared.saveData(pushGym, forKey: "originalPush GymText")
+            SharedDataManager.shared.saveData(legGym, forKey: "originalLeg GymText")
         }
     }
     var body: some Scene {
@@ -671,9 +682,6 @@ private struct viewPlanPopup: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.gruvboxSecondary, lineWidth: 1)
                 )
-                .onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-                }
                 
                 
                 
@@ -764,6 +772,10 @@ private struct viewPlanPopup: View {
                         }
                     Divider()
                 }
+                .onTapGesture {
+                    //nothing
+                    //removes the deselecting option if the text area is tapped
+                }
                 
                 
             
@@ -778,14 +790,14 @@ private struct viewPlanPopup: View {
                 .cornerRadius(10)
                 .bold()
             }
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-            }
             .padding(100)
             .padding(.top, 100)
             .padding(.bottom, 200)
             .background(Color.gruvboxBackground)
             .cornerRadius(10)
+        }
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
         }
         .onAppear(){
             keys = SharedDataManager.shared.keysEndingWithText()
@@ -806,9 +818,6 @@ private struct viewPlanPopup: View {
                 currKey = "N/A"
                 text = "None"
             }
-        }
-        .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
         }
     }
     func getDayOfWeekString() -> String{
