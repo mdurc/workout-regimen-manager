@@ -96,8 +96,8 @@ struct text_widgetApp: App {
             SharedDataManager.shared.saveData(restDay, forKey: "originalRest DayText")
             
             
-            let pullGym = "Gym: 3 SETS OF EACH\n--------\nMachine bench\nFly machine push\nChest machine push out\nTricep overhead\nLateral raises, cable\nDumbbell overhead press\nDips (2 sets Chest, 2 sets Tricep)\nPush-ups\nAbs"
-            let pushGym = "Gym: 3 SETS OF EACH\n--------\nPull ups\nChin ups\nDumbbell rows or Shoulder Press\nLat pull-down wide\nCable sitting rows\nRear felt fly\nBicep curls/ preacher curls\nCross hammer curls\nAbs"
+            let pullGym = "Gym: 3 SETS OF EACH\n--------\nPull ups\nChin ups\nDumbbell rows\nLat pull-down wide\nShoulder Press\nRear felt fly\nBicep curls/ preacher curls\nCross hammer curls\nAbs"
+            let pushGym = "Gym: 3 SETS OF EACH\n--------\nMachine bench\nFly machine push\nChest machine push out\nTricep overhead\nLateral raises, cable\nDumbbell overhead press\nDips (2 sets Chest, 2 sets Tricep)\nPush-ups\nAbs"
             let legGym = "Gym: 3 SETS OF EACH\n--------\nLeg press\nLeg lift extension for thighs\nLeg curls for hamstrings\nCalves\nLeg abductors and adductors\nBulgarian Split Squats / Pistol squats"
             
             SharedDataManager.shared.saveData(pullGym, forKey: "Pull GymText")
@@ -693,6 +693,17 @@ private struct viewPlanPopup: View {
                     
                     Spacer()
                     
+                    Button("Set Today") {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                        SharedDataManager.shared.saveData(currKey.dropLast(4), forKey: getDayOfWeekString())
+                        bindedDayText = getWorkoutDayData(inputData: getDayOfWeekString())
+                    }
+                    .foregroundColor(.gruvboxBackground)
+                    .padding(5)
+                    .background(Color.teal)
+                    .cornerRadius(10)
+                    .bold()
+                    
                     Button("Add New") {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         
@@ -801,8 +812,6 @@ private struct viewPlanPopup: View {
         }
         .onAppear(){
             keys = SharedDataManager.shared.keysEndingWithText()
-            print(SharedDataManager.shared.returnAllKeys())
-            print(SharedDataManager.shared.returnAllKeys().count)
             if let sharedData = SharedDataManager.shared.getData(forKey: getDayOfWeekString()) as? String {
                 currKey = sharedData + "Text"
                 currentWorkoutDayKey = currKey
@@ -833,6 +842,17 @@ private struct viewPlanPopup: View {
             case 6: return "Friday"
             case 7: return "Saturday"
             default: return "Sunday"
+        }
+    }
+    func getWorkoutDayData(inputData: String) -> String{
+        if let sharedData = SharedDataManager.shared.getData(forKey: inputData) as? String {
+            if let sharedDatatwo = SharedDataManager.shared.getData(forKey: sharedData+"Text") as? String {
+                return sharedDatatwo
+            } else{
+                return "N/A"
+            }
+        } else {
+            return "N/A"
         }
     }
     
