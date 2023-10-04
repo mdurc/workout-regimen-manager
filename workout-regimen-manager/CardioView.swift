@@ -9,6 +9,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import CoreMotion
 
 struct CardioView: View {
     @State private var region = MKCoordinateRegion(
@@ -61,6 +62,9 @@ struct CardioView: View {
                     Map(coordinateRegion: $region, showsUserLocation: true)
                         .onAppear {
                             locationManager.requestWhenInUseAuthorization()
+                            locationManager.distanceFilter = kCLDistanceFilterNone
+                            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                            
                             if let userLocation = locationManager.location?.coordinate {
                                 region.center = userLocation
                             }
@@ -219,6 +223,7 @@ struct CardioView: View {
                             
                             //reset run values
                             showEndRunConfirmation = true
+                            locationManagerDelegate.pauseElevationTracking()
                             timeStarted = "hh:mm AM/PM"
                             totalElapsedTime = 0
                             startedRun = false
@@ -368,7 +373,12 @@ struct CardioView: View {
 class LocationManagerDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var lastLocation: CLLocation?
     @Published var miles = 0.0
-    @Published var elevationGain: Double = 0.0
+    @Published var elevationGain: Float = 0.00
+    
+    @Published var altimeter = CMAltimeter()
+    @Published var relativeAltitude : Float = 0.00
+    @Published var lastAlt : Float = 0.00
+    
     private var isPaused = false
     private var resetLocation = true
     private var elevationTracking = false
@@ -386,16 +396,24 @@ class LocationManagerDelegate: NSObject, ObservableObject, CLLocationManagerDele
                 miles += distance / 1609.34
                 
                 if elevationTracking {
-                    if location.altitude > lastLocation.altitude {
-                        let elevationChange = location.altitude - lastLocation.altitude
-                        let elevationChangeRounded = (elevationChange * 10).rounded(.down) / 10 //Round to lowest 0.1 increment
-                        elevationGain += elevationChangeRounded
+                    startAltitudeTracking()
+                    if relativeAltitude > lastAlt {
+                        elevationGain += relativeAltitude - lastAlt
                     }
+                    lastAlt = relativeAltitude
                 }
             }
         }
 
         lastLocation = location
+    }
+    
+    func startAltitudeTracking() {
+        if CMAltimeter.isRelativeAltitudeAvailable(){
+            altimeter.startRelativeAltitudeUpdates(to: OperationQueue.main) { (data, error) in
+                self.relativeAltitude = Float(String(format: "%.2f", (data?.relativeAltitude.floatValue)!))!
+            }
+        }
     }
     
     func pauseTracking() {
@@ -405,6 +423,7 @@ class LocationManagerDelegate: NSObject, ObservableObject, CLLocationManagerDele
     
     func pauseElevationTracking() {
         elevationTracking = false
+        altimeter.stopRelativeAltitudeUpdates()
     }
     
     func resumeElevationTracking(){

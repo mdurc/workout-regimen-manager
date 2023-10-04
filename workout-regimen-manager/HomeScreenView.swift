@@ -22,7 +22,7 @@ struct HomeScreenView: View {
                         .padding(.top,100)
                     
                     NavigationLink(destination: ContentView()) {
-                        Text("Gym Workout")
+                        Text("Workouts")
                             .font(.system(size:25).weight(.medium))
                             .foregroundColor(.gruvboxForeground)
                             .padding(.horizontal, 25)
@@ -31,7 +31,7 @@ struct HomeScreenView: View {
                             .cornerRadius(10)
                     }
                     NavigationLink(destination: CalendarView()) {
-                        Text("Calender + Log")
+                        Text("Calender & Log")
                             .font(.system(size:25).weight(.medium))
                             .foregroundColor(.gruvboxForeground)
                             .padding(.horizontal, 25)

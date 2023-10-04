@@ -67,12 +67,12 @@ struct text_widgetApp: App {
             
             @State var manager = [
                 "Sunday": "Rest Day",
-                "Monday": "Leg Day",
-                "Tuesday": "Push Day",
-                "Wednesday": "Pull Day",
-                "Thursday": "Leg Day",
-                "Friday": "Push Day",
-                "Saturday": "Pull Day"
+                "Monday": "Leg Gym",
+                "Tuesday": "Push Gym",
+                "Wednesday": "Pull Gym",
+                "Thursday": "Leg Gym",
+                "Friday": "Push Gym",
+                "Saturday": "Pull Gym"
             ]
             
             
@@ -85,28 +85,30 @@ struct text_widgetApp: App {
             let legDay = "Calisthenics: 3 Sets of each, or 3 circuits\n--------\nBodyweight Squats - 10 REPS\nBridge Ups - 25 REPS\nLunges - 10 REPS\nArcher Squats - 10 REPS\nHorse Stance - 45 SECONDS\nCalf Raises - 25 REPS\nBulgarian Split Squats - 10-12 REPS\nSupported tuck - 10 REPS\nAbs leg lifts - 10 REPS\nPistol Squats - 5 REPS\nSingle Leg Planks - 30 SECONDS\nHollow Body Holds - MAX ~45-60s"
             let restDay="Rest"
             
-            SharedDataManager.shared.saveData(pullDay, forKey: "Pull DayText")
-            SharedDataManager.shared.saveData(pushDay, forKey: "Push DayText")
-            SharedDataManager.shared.saveData(legDay, forKey: "Leg DayText")
-            SharedDataManager.shared.saveData(restDay, forKey: "Rest DayText")
-            
-            SharedDataManager.shared.saveData(pullDay, forKey: "originalPull DayText")
-            SharedDataManager.shared.saveData(pushDay, forKey: "originalPush DayText")
-            SharedDataManager.shared.saveData(legDay, forKey: "originalLeg DayText")
-            SharedDataManager.shared.saveData(restDay, forKey: "originalRest DayText")
+            newWorkout(textData: pullDay, displayKey: "Pull Home")
+            newWorkout(textData: pushDay, displayKey: "Push Home")
+            newWorkout(textData: legDay, displayKey: "Leg Home")
+            newWorkout(textData: restDay, displayKey: "Rest Day")
             
             
-            let pullGym = "Gym: 3 SETS OF EACH\n--------\nPull ups\nChin ups\nDumbbell rows\nLat pull-down wide\nShoulder Press\nRear felt fly\nBicep curls/ preacher curls\nCross hammer curls\nAbs"
-            let pushGym = "Gym: 3 SETS OF EACH\n--------\nMachine bench\nFly machine push\nChest machine push out\nTricep overhead\nLateral raises, cable\nDumbbell overhead press\nDips (2 sets Chest, 2 sets Tricep)\nPush-ups\nAbs"
-            let legGym = "Gym: 3 SETS OF EACH\n--------\nLeg press\nLeg lift extension for thighs\nLeg curls for hamstrings\nCalves\nLeg abductors and adductors\nBulgarian Split Squats / Pistol squats"
+            let pullGym = "Gym: 3 Sets of each\n--------\nPull ups\nAbs\nPreacher Curls\nHammer Curls\nBicep Curls/Chin ups\nSeated Rows\nWide Lat pull-down\nRear delt flys"
+            let pushGym = "Gym: 3 Sets of each\n--------\nMachine bench\nFly machine push\nChest machine push out\nShoulder Press\nTricep overhead\nCable lateral raises\nTricep pulldowns\nDips to failure\nPush-ups to failure\nAbs"
+            let legGym = "Gym: 3 Sets of each\n--------\nLeg press\nLeg lift extension for thighs\nLeg curls for hamstrings\nCalves\nLeg abductors and adductors\nBulgarian Split Squats / Pistol squats"
             
-            SharedDataManager.shared.saveData(pullGym, forKey: "Pull GymText")
-            SharedDataManager.shared.saveData(pushGym, forKey: "Push GymText")
-            SharedDataManager.shared.saveData(legGym, forKey: "Leg GymText")
+            newWorkout(textData: pullGym, displayKey: "Pull Gym")
+            newWorkout(textData: pushGym, displayKey: "Push Gym")
+            newWorkout(textData: legGym, displayKey: "Leg Gym")
             
-            SharedDataManager.shared.saveData(pullGym, forKey: "originalPull GymText")
-            SharedDataManager.shared.saveData(pushGym, forKey: "originalPush GymText")
-            SharedDataManager.shared.saveData(legGym, forKey: "originalLeg GymText")
+            
+            let pushups = "Scapular Pushups\nPseudo Planche Pushups\nArcher Pushups\nPike Pushups\nDiamond Pushups"
+            let abs = "Supported tuck w/hollow body decline\nAb leg lift\nPlank\nSide plank rotating twist\nBicycle Crunch"
+            newWorkout(textData: pushups, displayKey: "Pushups")
+            newWorkout(textData: abs, displayKey: "Abs")
+            
+        }
+        func newWorkout(textData : String, displayKey: String){
+            SharedDataManager.shared.saveData(textData, forKey: displayKey + "Text")
+            SharedDataManager.shared.saveData(textData, forKey: "original" + displayKey + "Text")
         }
     }
     var body: some Scene {
