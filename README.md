@@ -28,9 +28,11 @@ Customizability option which allows user to reorder which weekday has which work
 
 
 
-Older Version
+Older Version that shows first features:
+
 https://github.com/mdurc/workout-regimen-manager/assets/121322100/b4f8c080-fa32-4c62-a999-8de767d08add
 
+Updated Version with newer features:
 
 ![UpdatedWorkoutApp](https://github.com/mdurc/workout-regimen-manager/assets/121322100/dd7b6fa4-9176-452c-95eb-c6b95462782f)
 
